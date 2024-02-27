@@ -1,0 +1,12 @@
+# 1. Abstract
+# 2. Problem & Motivation
+# 3. Project Objectives
+# 4. Data Source
+# 5. Approach & Methodology
+# 6. Literature Review
+# 7. Comparison to Existing Applications
+# 8. Main Features
+# 9. UI Prototype
+# 10. Application Architecture
+# 11. Timeline
+# 12. References
