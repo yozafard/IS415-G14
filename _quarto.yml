@@ -7,8 +7,9 @@ website:
     left: 
       - text: "Project Proposal"
         href: "Deliverables/Proposal.qmd"
-    #right:
-
+    right:
+      - href: index.qmd
+        text: "Home"
 format:
   html:
     theme: cosmo
