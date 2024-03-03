@@ -1,0 +1,19 @@
+project:
+  type: website
+
+website:
+  title: "IS415-G14"
+  navbar:
+    left: 
+      - text: "Project Proposal"
+        href: "Deliverables/Proposal.qmd"
+    #right:
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+editor: visual
+
