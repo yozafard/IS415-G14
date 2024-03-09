@@ -6,10 +6,10 @@ website:
   navbar:
     left: 
       - text: "Project Proposal"
-        href: "Deliverables/Proposal.qmd"
+        href: "Deliverables/Proposal.html"
     right:
-      - href: index.qmd
-        text: "Home"
+      - icon: github
+        href: https://github.com/yozafard/IS415-G14
 format:
   html:
     theme: cosmo

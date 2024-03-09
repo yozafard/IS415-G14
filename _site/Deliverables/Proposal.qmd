@@ -87,7 +87,7 @@ The introduction of temporal data in GTWR is evaluated by comparing its results 
 
 # 6. Literature Review
 
-## 6.1 [Mass Appraisal Modeling of Real Estate in Urban Centers by Geographically and Temporally Weighted Regression: A Case Study of Beijing’s Core Area](https://www.mdpi.com/2073-445X/9/5/143)
+##  6.1 [Mass Appraisal Modeling of Real Estate in Urban Centers by Geographically and Temporally Weighted Regression: A Case Study of Beijing’s Core Area](https://www.mdpi.com/2073-445X/9/5/143)
 
 ### Objective
 
@@ -176,7 +176,7 @@ A standard prediction model that does not take into account characteristics such
 
 ### Learning points
 
-![](images/litrev3.png)
+![](images/litrev3.png) 
 
 This shows that while a traditional HPM can explain 73% of the variances,  adding the spatial data can improve the accuracy.
 
@@ -256,16 +256,4 @@ This page will show the Spatial autocorrelation analysis of the prices of the ho
 
 # 11. Timeline
 
-|                                   | Week 8 | Week 9 | Week 10 | Week 11 | Week 12 | Week 13 |
-|:-----------------:|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|
-| Research, Proposal & Prototyping  |   ⚫   |        |         |         |         |         |
-| Data Scraping, Data preprocessing |   ⚫   |   ⚫   |         |         |         |         |
-|        Building Feature 1         |        |   ⚫   |   ⚫    |   ⚫    |         |         |
-|  Integrating & Testing Feature 1  |        |        |         |   ⚫    |         |         |
-|        Building Feature 2         |        |   ⚫   |   ⚫    |   ⚫    |         |         |
-|  Integrating & Testing Feature 2  |        |        |         |   ⚫    |         |         |
-|        Building Feature 3         |        |   ⚫   |   ⚫    |   ⚫    |         |         |
-|  Integrating & Testing Feature 3  |        |        |         |   ⚫    |         |         |
-|   Final Integration and Testing   |        |        |         |   ⚫    |   ⚫    |         |
-|      Poster & Research Paper      |        |        |         |   ⚫    |   ⚫    |   ⚫    |
-|     Presentation Preparation      |        |        |         |         |   ⚫    |   ⚫    |
+![](images/timeline.png)
