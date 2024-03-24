@@ -5,3 +5,4 @@
 
 /.quarto/
 *.csv
+*.log
