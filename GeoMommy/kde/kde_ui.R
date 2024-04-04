@@ -7,8 +7,6 @@
 
 # Define UI for application that draws a histogram
 kde_ui <- fluidPage(
-  titlePanel("Kernel Density Estimation for Cities"),
-  
   # Sidebar with controls
   sidebarLayout(
     sidebarPanel(
@@ -38,8 +36,24 @@ kde_ui <- fluidPage(
     
     # Show a plot of the generated distribution
     mainPanel(
-      shinycssloaders::withSpinner(plotOutput("kdePlot"), type = 8, color = "#2caa4a")
-      
+      tabsetPanel(
+        tabPanel(
+          "Kernel Density Estimation",
+          shinycssloaders::withSpinner(plotOutput("kdePlot"), type = 8, color = "#2caa4a")
+        ),
+        tabPanel(
+          "Variable Distribution",
+          # 
+        ),
+        tabPanel(
+          "Correlation Plot",
+          # 
+        ),
+        tabPanel(
+          "Data Table",
+          # 
+        )
+      )
     )
   )
 )

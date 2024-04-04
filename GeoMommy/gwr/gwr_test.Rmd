@@ -10,6 +10,8 @@ gwr <- read_rds("data/gwr.rds")
 jakarta_sf <- read_rds("data/jakarta_sf.rds")
 ```
 
+
+
 ```{r}
 mamikos_full <- mamikos_full |>
   mutate(log_price = log(price_monthly))
@@ -29,18 +31,27 @@ gwr_sf <- gwr$SDF |> st_as_sf() |> st_transform(crs = 4326)
 ```
 
 ```{r}
+jakarta_gwr <- jakarta_sf |>
+  st_join(gwr_sf) |> # Join data within the polygons
+  group_by(geometry) |> # Group by some unique identifier for jakarta_sf polygons
+  summarise(across(where(is.numeric), ~mean(.x, na.rm = TRUE)), .groups = "drop")
+```
+
+```{r}
+write_rds(jakarta_gwr, "data/jakarta_gwr.rds")
+```
+
+```{r}
 mamikos_palette <- colorRampPalette(c("#f95516", "#dbdbdb", "#2caa4a"))(100)
 
 tmap_mode("view")
-tm_shape(jakarta_sf)+
-  tm_polygons() +
-tm_shape(gwr_sf) +
-  tm_dots(col = "Local_R2", 
-          style = "quantile", 
-          palette = mamikos_palette,
-          title = "Local R2",
-          midpoint = 0) +
-  tm_view(set.zoom.limits = c(11,14))
+tm_shape(jakarta_gwr) +  # Your spatial polygons data
+  tm_polygons(col="size",  # The variable to color by
+              style="quantile",  # The method for creating color breaks
+              palette=mamikos_palette,  # Your chosen color palette
+              title="Local R2") +  # Legend title
+  tm_view(set.zoom.limits = c(11,14))  # Set zoom limits
+
 tmap_mode("plot")
 ```
 
