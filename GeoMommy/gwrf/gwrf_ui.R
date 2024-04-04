@@ -1,7 +1,5 @@
 gwrf_ui <- tabPanel(
   "GWRF",
-  titlePanel("Predictive Models (GWRF & MLR)"),
-  
   sidebarLayout(
     sidebarPanel(
       selectInput(inputId = "model",
