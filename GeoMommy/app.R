@@ -9,8 +9,8 @@ source('gwrf/gwrf_ui.R', local = TRUE)
 ui <- fluidPage(
   navbarPage("GeoMommy",
     tabPanel("EDA", kde_ui), 
-    tabPanel("GWR", gwr_ui),
-    tabPanel("GWRF", gwrf_ui)
+    tabPanel("Descriptive", gwr_ui),
+    tabPanel("Predictive", gwrf_ui)
   )
 )
 
