@@ -15,7 +15,6 @@ ui <- fluidPage(
     tabPanel("Predictive", gwrf_ui)
   )
 ) 
-# The server logic will remain the same, sourcing external files for features
 server <- function(input, output) {
   source("kde/kde.R", local = TRUE)
   source("gwr/gwr.R", local = TRUE)

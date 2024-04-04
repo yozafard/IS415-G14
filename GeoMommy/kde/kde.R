@@ -35,16 +35,15 @@ jakarta <- jakarta |> st_transform(23834)
   output$kdePlot <- renderPlot({
     city_name <- input$city
     kde_est <- get_kde(city_name, input$bandwidth, input$kernel)
-    plot(kde_est, main=city_name)
-    # kde_grid <- as.SpatialGridDataFrame.im(kde)
-    # spplot(kde_grid, main=city_name)
+    # plot(kde_est, main=city_name)
+    kde_grid <- as.SpatialGridDataFrame.im(kde_est)
+    spplot(kde_grid, main=city_name)
     # plot(kde, main=city_name)
-    # ggplot(kde, aes(x = x, y = y, fill = z)) +
-    #   geom_raster(interpolate = TRUE) +
-    #   scale_fill_viridis_c() +
-    #   coord_fixed() +
-    #   labs(fill = "Density", x = "Longitude", y = "Latitude") +
-    #   theme_minimal() +
-    #   theme(legend.position = "right")
+    # kde_raster <- raster(kde_grid)
+    # projection(kde_raster) <- CRS("+init=EPSG:3414")
+    # 
+    # tm_shape(kde_raster) + 
+    #   tm_raster("v") +
+    #   tm_layout(legend.position = c("right", "bottom"), frame = FALSE)
   })
 
