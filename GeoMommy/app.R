@@ -1,4 +1,4 @@
-library(shiny)
+pacman::p_load(shiny, shinycssloaders, car, olsrr, corrplot, ggpubr, sf, spdep, GWmodel, tmap, tidyverse, gtsummary)
 
 # UI
 source('kde/kde_ui.R', local = TRUE)
@@ -7,18 +7,10 @@ source('gwrf/gwrf_ui.R', local = TRUE)
 
 # Define the UI for the application
 ui <- fluidPage(
-  
-  # Application title
-  titlePanel("GeoMommy"),
-  
-  # Main layout with tabbed features
-  mainPanel(
-    tabsetPanel(
-      # Tab for each feature
-      kde_ui,
-      gwr_ui,
-      gwrf_ui
-    )
+  navbarPage("GeoMommy",
+    tabPanel("KDE", kde_ui), 
+    tabPanel("GWR", gwr_ui),
+    tabPanel("GWRF", gwrf_ui)
   )
 )
 

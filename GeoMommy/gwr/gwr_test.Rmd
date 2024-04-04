@@ -1,0 +1,46 @@
+```{r}
+pacman::p_load(car, olsrr, corrplot, ggpubr, sf, spdep, GWmodel, tmap, tidyverse, gtsummary)
+```
+
+```{r}
+mamikos_sf <- read_rds("data/mamikos_sf.rds")
+mamikos_full <- read_rds("data/mamikos_full.rds")
+bw <- read_rds("data/bw.rds")
+gwr <- read_rds("data/gwr.rds")
+jakarta_sf <- read_rds("data/jakarta_sf.rds")
+```
+
+```{r}
+mamikos_full <- mamikos_full |>
+  mutate(log_price = log(price_monthly))
+```
+
+```{r}
+ggplot(mamikos_full, aes(x = log_price)) +
+  geom_histogram(bins = 30, fill = "#2caa4a", color = "black") +
+  labs(title = "Log-Transformed Monthly Price Distribution",
+       x = "Log Monthly Price (IDR)",
+       y = "Frequency")
+```
+
+```{r}
+mamikos_sp <- as_Spatial(mamikos_full)
+gwr_sf <- gwr$SDF |> st_as_sf() |> st_transform(crs = 4326)
+```
+
+```{r}
+mamikos_palette <- colorRampPalette(c("#f95516", "#dbdbdb", "#2caa4a"))(100)
+
+tmap_mode("view")
+tm_shape(jakarta_sf)+
+  tm_polygons() +
+tm_shape(gwr_sf) +
+  tm_dots(col = "Local_R2", 
+          style = "quantile", 
+          palette = mamikos_palette,
+          title = "Local R2",
+          midpoint = 0) +
+  tm_view(set.zoom.limits = c(11,14))
+tmap_mode("plot")
+```
+
