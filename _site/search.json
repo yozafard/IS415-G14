@@ -4,14 +4,14 @@
     "href": "Deliverables/Proposal.html",
     "title": "Project Proposal",
     "section": "",
-    "text": "The escalating demand for accurate and geographically nuanced house pricing in Metro Manila necessitates innovative methods for analyzing real estate data. This project proposes an advanced analytical platform that integrates Interactive Maps, Geographically Weighted Regression Analysis Dashboards, and Cluster Analysis to provide detailed insights into house prices across Metro Manila. By leveraging real estate data scraped from Lamudi and geospatial data of the Philippines, the project aims to shed light on the spatial dynamics and factors influencing house prices.\nThrough methodologies such as Geographically Weighted Regression (GWR) and Kernel Density Estimation, the platform will offer both visual and quantitative analyses to cater to different stakeholders, including potential homebuyers, real estate agents, and policymakers. This project is designed to overcome the limitations of traditional appraisal methods by offering a more localized and dynamic analysis of the real estate market."
+    "text": "This project investigates room rental price prediction in Jakarta using geospatial analysis methods to assist home owners, property agents, and potential business owners in the rental market. Through Geospatial Weighted Regression, both descriptive and predictive methods, and Kernel Density Estimation techniques, we explore the spatial dynamics and determinants of rental prices across Jakarta’s diverse neighborhoods. By analyzing publicly available datasets and employing machine learning algorithms, we uncover spatial patterns, identify high-demand areas, and segment neighborhoods based on rental price similarities. The project culminates in the development of interactive visualizations that convey insights intuitively, facilitating informed decision making and strategic planning in Jakarta’s evolving rental market."
   },
   {
     "objectID": "Deliverables/Proposal.html#data-preparation",
     "href": "Deliverables/Proposal.html#data-preparation",
     "title": "Project Proposal",
     "section": "5.1 Data Preparation",
-    "text": "5.1 Data Preparation\n\n1. Data Sourcing\nOur dataset will be sourced from Lamudi, a real-estate listing website in the Phillipines\n\n\n2. Data Importing\nThe data importing will leverage on R libraries, such as dplyr for aspatial data, and sf for geospatial data\n\n\n3. Data Wrangling\nThe imported data undergoes cleaning and preprocessing to address missing values, outliers, and inconsistencies. This stage may involve normalization, encoding categorical variables, and data transformation to ensure compatibility with analysis methods."
+    "text": "5.1 Data Preparation\n\n1. Data Sourcing\nOur dataset will be sourced from Mamikos, a property rental platform in Indonesia.\n\n\n2. Data Importing\nThe data importing will leverage on R libraries, such as dplyr for aspatial data, and sf for geospatial data\n\n\n3. Data Wrangling\nThe imported data undergoes cleaning and preprocessing to address missing values, outliers, and inconsistencies. This stage may involve normalization, encoding categorical variables, and data transformation to ensure compatibility with analysis methods."
   },
   {
     "objectID": "Deliverables/Proposal.html#exploratory-data-analysis",
