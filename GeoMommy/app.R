@@ -10,9 +10,9 @@ source('gwrf/gwrf_ui.R', local = TRUE)
 # Define the UI for the application
 ui <- fluidPage(
   navbarPage("GeoMommy",
-    tabPanel("KDE", kde_ui), 
-    tabPanel("GWR", gwr_ui),
-    tabPanel("GWRF", gwrf_ui)
+    tabPanel("EDA", kde_ui), 
+    tabPanel("Descriptive", gwr_ui),
+    tabPanel("Predictive", gwrf_ui)
   )
 ) 
 # The server logic will remain the same, sourcing external files for features

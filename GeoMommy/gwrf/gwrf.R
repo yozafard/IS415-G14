@@ -1,20 +1,20 @@
 library(ggplot2)
 
-gwRF <- readRDS("gwrf/rds/gwRF_adaptive.rds")
-grf_pred <- readRDS("gwrf/rds/GRF_pred.rds")
-test_data <- readRDS("gwrf/rds/test_data_p.rds")
+gwRF <- readRDS("gwrf/data/gwRF_adaptive.rds")
+grf_pred <- readRDS("gwrf/data/GRF_pred.rds")
+test_data <- readRDS("gwrf/data/test_data_p.rds")
 
-airport <- readRDS("gwrf/rds/airport.rds")
-gereja <- readRDS("gwrf/rds/gereja.rds")
-kantorpos <- readRDS("gwrf/rds/kantorpos.rds")
-kesehatan <- readRDS("gwrf/rds/kesehatan.rds")
-masjid <- readRDS("gwrf/rds/masjid.rds")
-other_saranaibadah <- readRDS("gwrf/rds/other_saranaibadah.rds")
-pendidikan <- readRDS("gwrf/rds/pendidikan.rds")
-pura <- readRDS("gwrf/rds/pura.rds")
-stasiunka <- readRDS("gwrf/rds/stasiunka.rds")
-vihara <- readRDS("gwrf/rds/vihara.rds")
-jakarta_union <- readRDS("gwrf/rds/jakarta_union.rds")
+airport <- readRDS("gwrf/data/airport.rds")
+gereja <- readRDS("gwrf/data/gereja.rds")
+kantorpos <- readRDS("gwrf/data/kantorpos.rds")
+kesehatan <- readRDS("gwrf/data/kesehatan.rds")
+masjid <- readRDS("gwrf/data/masjid.rds")
+other_saranaibadah <- readRDS("gwrf/data/other_saranaibadah.rds")
+pendidikan <- readRDS("gwrf/data/pendidikan.rds")
+pura <- readRDS("gwrf/data/pura.rds")
+stasiunka <- readRDS("gwrf/data/stasiunka.rds")
+vihara <- readRDS("gwrf/data/vihara.rds")
+jakarta_union <- readRDS("gwrf/data/jakarta_union.rds")
 
 addr_input <- reactive({
   data.frame(addr = input$searchBar)
@@ -72,7 +72,7 @@ output$GWRFMap <- renderLeaflet({
 )
 
 output$GWRFText <- renderText({
-  paste("Predicted Price:")
+  paste("Predicted Price:")data
 })
 
 
