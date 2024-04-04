@@ -209,27 +209,26 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="abstract" class="level1">
 <h1>1. Abstract</h1>
-<p>The escalating demand for accurate and geographically nuanced house pricing in Metro Manila necessitates innovative methods for analyzing real estate data. This project proposes an advanced analytical platform that integrates Interactive Maps, Geographically Weighted Regression Analysis Dashboards, and Cluster Analysis to provide detailed insights into house prices across Metro Manila. By leveraging real estate data scraped from Lamudi and geospatial data of the Philippines, the project aims to shed light on the spatial dynamics and factors influencing house prices.</p>
-<p>Through methodologies such as Geographically Weighted Regression (GWR) and Kernel Density Estimation, the platform will offer both visual and quantitative analyses to cater to different stakeholders, including potential homebuyers, real estate agents, and policymakers. This project is designed to overcome the limitations of traditional appraisal methods by offering a more localized and dynamic analysis of the real estate market.</p>
+<p>This project investigates room rental price prediction in Jakarta using geospatial analysis methods to assist home owners, property agents, and potential business owners in the rental market. Through Geospatial Weighted Regression, both descriptive and predictive methods, and Kernel Density Estimation techniques, we explore the spatial dynamics and determinants of rental prices across Jakarta’s diverse neighborhoods. By analyzing publicly available datasets and employing machine learning algorithms, we uncover spatial patterns, identify high-demand areas, and segment neighborhoods based on rental price similarities. The project culminates in the development of interactive visualizations that convey insights intuitively, facilitating informed decision making and strategic planning in Jakarta’s evolving rental market.</p>
 </section>
 <section id="problem-motivation" class="level1">
 <h1>2. Problem &amp; Motivation</h1>
-<p>The Philippines is currently one of Asia’s fastest growing economies with an aggressive and competitive real estate industry. Despite the pandemic, nationwide residential property prices grew by 27% in Q2 2020 (highest growth rate since Q1 2016). The real estate market in Metro Manila is characterized by its dynamism, complexity, and significant spatial heterogeneity, which makes the task of accurately assessing house prices a challenging endeavor. Traditional methods of real estate appraisal, such as Ordinary Least Squares Regression, often fail to account for spatial autocorrelation and heterogeneity, leading to inaccurate price estimations. Furthermore, potential homebuyers and other stakeholders lack access to user-friendly platforms that can provide a detailed spatial analysis of house prices. This gap hinders informed decision-making and contributes to the opacity of the real estate market.</p>
+<p>Jakarta’s rapid urbanization and diverse demographic landscape present a complex challenge in understanding room rental prices. Traditional statistical methods overlook the spatial intricacies and demographic nuances that shape Jakarta’s rental market dynamics. Factors like proximity to transportation, amenities, and schools contribute to the complexity. To address this, we aim to employ Geographically Weighted Regression (GWR) models to predict rental prices across Jakarta’s neighborhoods. By capturing spatial variations in local amenities, GWR models offer tailored insights for stakeholders, enabling informed decisions amidst Jakarta’s evolving urban landscape.</p>
 </section>
 <section id="project-objectives" class="level1">
 <h1>3. Project Objectives</h1>
-<p>In light of the complexities and the lack of accurate, accessible tools for analyzing house prices in Metro Manila, there is a pressing need for a more refined approach that takes into account geographical nuances and offers real-time data visualization. The project is motivated by the opportunity to leverage recent advancements in spatial analysis and data visualization technologies to address these challenges. By creating an interactive, geographically informed platform, the project aims to democratize access to real estate data, enabling potential buyers, investors, and policymakers to make more informed decisions. Additionally, the project seeks to contribute to the academic and practical understanding of real estate valuation, offering insights that could refine existing models and improve the accuracy of future real estate market analyses.</p>
+<p>In light of the complexities and the lack of accurate, accessible tools for analyzing rental prices in Jakarta, there is a pressing need for a more refined approach that takes into account geographical nuances and offers real-time data visualization. The project is motivated by the opportunity to leverage recent advancements in spatial analysis and data visualization technologies to address these challenges. By creating an interactive, geographically informed platform, the project aims to democratize access to real estate data, enabling potential buyers, investors, and policymakers to make more informed decisions. Additionally, the project seeks to contribute to the academic and practical understanding of real estate valuation, offering insights that could refine existing models and improve the accuracy of future real estate market analyses.</p>
 </section>
 <section id="data-source" class="level1">
 <h1>4. Data Source</h1>
 <ul>
 <li>Real Estate Price Data</li>
 </ul>
-<p>Real estate price data scraped from <a href="http://lamudi.com.ph/">Lamudi Phillipines</a>, a popular real estate listing marketplace in the Philippines. This dataset contains the listing price of a house along with their respective features like number of bedrooms, number of bathrooms, amenities, etc.</p>
+<p>Rental unit prices data scraped from <a href="https://mamikos.com/">Mamikos</a>, a popular leading property rental platform and management company in Indonesia. This dataset contains the listing price of rental units along with their respective features like size of the rooms, price, etc.</p>
 <ul>
 <li>Geospatial data of the Philippines</li>
 </ul>
-<p>A shapefile contains the borders of administrative regions level 1-4 of The Phillipines obtained from <a href="https://data.humdata.org/dataset/cod-ab-phl">Humdata</a>.</p>
+<p>A shapefile contains the borders of administrative regions of Jakarta, along with the coordinates of amenities that are in the region. This data is taken from <a href="https://www.indonesia-geospasial.com/2020/01/shp-rbi-provinsi-dki-jakarta-perwilayah.html">Indonesia Geospasial</a>.</p>
 </section>
 <section id="approach-methodology" class="level1">
 <h1>5. Approach &amp; Methodology</h1>
@@ -237,7 +236,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="data-preparation">5.1 Data Preparation</h2>
 <section id="data-sourcing" class="level3">
 <h3 class="anchored" data-anchor-id="data-sourcing">1. Data Sourcing</h3>
-<p>Our dataset will be sourced from Lamudi, a real-estate listing website in the Phillipines</p>
+<p>Our dataset will be sourced from Mamikos, a property rental platform in Indonesia.</p>
 </section>
 <section id="data-importing" class="level3">
 <h3 class="anchored" data-anchor-id="data-importing">2. Data Importing</h3>
