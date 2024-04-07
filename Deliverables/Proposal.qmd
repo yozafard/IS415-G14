@@ -57,35 +57,28 @@ The imported data undergoes cleaning and preprocessing to address missing values
 
 Key distributions and relationships within the data are visualized using histograms and box plots. Histograms reveal the distribution of rental prices and other numerical variables, while box plots identify outliers and the spread of data across categorical variables.
 
-### 2. Choropleth
 
-These maps provide a visual representation of rental price variations across different geographical areas, highlighting regions with higher or lower average rental prices.
+### 2. Point Pattern Analysis - Kernel Density Estimation
 
-### 3. Kernel Density Estimation
+KDE plots help identify the density of rental properties across the city, offering insights into high-demand areas and potential patterns of spatial clustering. Price will also be used as a weight in the calculation, to offer more insight on high price rentals
 
-KDE plots help identify the density of rental properties across the city, offering insights into high-demand areas and potential patterns of spatial clustering.
-
-## 5.3 Hedonic Pricing Model - Ordinary Least Squares Regression
+## 3.1 Hedonic Pricing Model - Ordinary Least Squares Regression
 
 This foundational model assesses the impact of various property and location-specific factors on rental prices. OLS regression facilitates the estimation of coefficients for each determinant, providing a baseline for comparison with more complex models.
 
 Results from the OLS model are evaluated to determine the significance and impact of each variable. This involves examining R-squared values, p-values, and coefficient sizes to assess model fit and variable importance.
 
-## 5.4 Geographically Weighted Regression
+## 3.2 Geographically Weighted Regression
 
 Building on the OLS model, GWR introduces spatial variation in coefficients, allowing for the examination of how the impact of determinants on rental prices varies across different locations.
 
 The results of GWR are compared to the OLS model to understand the benefits of incorporating spatial data. This comparison highlights the spatial non-stationarity of relationships between rental prices and their determinants.
 
-## 5.5 Geographically and Temporally Weighted Regression
+## 3.3 Geographically Weighted Random Forest
 
-GTWR extends the analysis by incorporating temporal factors, such as the year or season of listing, alongside spatial data. This model captures how the influence of determinants on rental prices changes not only across space but also over time.
+# 4. Literature Review
 
-The introduction of temporal data in GTWR is evaluated by comparing its results with those of GWR and OLS models. This comparison sheds light on the temporal dynamics affecting rental prices and the added value of considering both spatial and temporal variations in the analysis.
-
-# 6. Literature Review
-
-## 6.1 [Mass Appraisal Modeling of Real Estate in Urban Centers by Geographically and Temporally Weighted Regression: A Case Study of Beijing’s Core Area](https://www.mdpi.com/2073-445X/9/5/143)
+## 4.1 [Mass Appraisal Modeling of Real Estate in Urban Centers by Geographically and Temporally Weighted Regression: A Case Study of Beijing's Core Area](https://www.mdpi.com/2073-445X/9/5/143)
 
 ### Objective
 
@@ -117,11 +110,11 @@ MRA with OLS can explain about 56% of the information, which is better than GWR 
 
 ### Areas for improvement
 
-Using data for the entire city, not only in Beijing’s core area.
+Using data for the entire city, not only in Beijing's core area.
 
 Using rental data that has higher frequency compared to transaction data. This can better describe the housing value from the perspective of residence and usage rather than investment.
 
-## 6.2 [Assessing the Impact of Selected Attributes on Dwelling Prices Using Ordinary Least Squares Regression and Geographically Weighted Regression: A Case Study in Poznań, Poland](https://www.mdpi.com/2073-445X/12/1/125)
+## 4.2 [Assessing the Impact of Selected Attributes on Dwelling Prices Using Ordinary Least Squares Regression and Geographically Weighted Regression: A Case Study in Poznań, Poland](https://www.mdpi.com/2073-445X/12/1/125)
 
 ### Objective
 
@@ -133,7 +126,7 @@ Determine what factors affect transaction prices in Poznan, Poland.
 
 May be biassed as the OLS method does not take into account spatial autocorrelation.
 
-2.  Moran’ I Test
+2.  Moran' I Test
 
 Check if there are any spatial autocorrelation
 
@@ -145,7 +138,7 @@ Allows the estimation of local coefficients based on samples within the bandwidt
 
 OLS only explains around 23% of the variability of the observed phenomenon
 
-After conducting Moran’ I Test, the property prices seem to be spatially clustered and there is a positive spatial autocorrelation.
+After conducting Moran' I Test, the property prices seem to be spatially clustered and there is a positive spatial autocorrelation.
 
 GWR returned an R Squared value of 0.477 and AIC of 15597.432. This indicates that GWR Performed better compared to the OLS method.
 
@@ -157,7 +150,7 @@ Usage of other methods
 
 Feature engineering - the variables selected are based on information from local real estate offices, which might overlook other important variables
 
-## 6.3 [Use of Geographically Weighted Regression (GWR) Method to Estimate the Effects of Location Attributes on the Residential Property Values](https://core.ac.uk/download/pdf/295045695.pdf)
+## 4.3 [Use of Geographically Weighted Regression (GWR) Method to Estimate the Effects of Location Attributes on the Residential Property Values](https://core.ac.uk/download/pdf/295045695.pdf)
 
 ### Objective
 
@@ -188,7 +181,7 @@ premiums across the study area. 
 
 Interpretation on the GWR Results - we can use qualitative methods, such as focus groups on the affected areas, to get a better interpretation of the GWR results
 
-## 6.4 [Modelling Housing Rents Using Spatial Autoregressive Geographically Weighted Regression: A Case Study in Cracow, Poland](https://www.mdpi.com/2220-9964/9/6/346)
+## 4.4 [Modelling Housing Rents Using Spatial Autoregressive Geographically Weighted Regression: A Case Study in Cracow, Poland](https://www.mdpi.com/2220-9964/9/6/346)
 
 ### Objective
 
@@ -218,9 +211,9 @@ Exploring the thresholds of when and where spatial correlation and spatial heter
 
 Adapting the models to different spatial complexity, making it more portable and usable in different locations
 
-# 7. Main Features
+# 5. Main Features
 
-## 7.1 Interactive Map of Metro Manila and the house prices
+## 5.1 Interactive Map of Metro Manila and the house prices
 
 Users can view an interactive point map of Metro Manila with some data points of houses. The map will be color-coded to show the house prices for each house in different areas. Users can click on the points to view the house prices and other details, which will be displayed on the side platform.
 
@@ -228,7 +221,7 @@ Users can also filter the map to show only the houses within a certain region. T
 
 Furthermore, users can input the house address of interest to get the predicted price that is calculated with our hedonic pricing model in the backend.
 
-## 7.2 Geographically Weighted Regression Analysis Dashboard
+## 5.2 Geographically Weighted Regression Analysis Dashboard
 
 Upon inputting the address of interest, users can go to the GWR Analysis tab to be shown a dashboard reflecting the statistics in the selected area. Statistics shown includes:
 
@@ -240,22 +233,22 @@ Upon inputting the address of interest, users can go to the GWR Analysis tab to 
 
 -   Bubble charts on the map showing the other statistics such as local R2 and coefficient estimates
 
-## 7.3 Cluster Analysis on High house prices
+## 5.3 Cluster Analysis on High house prices
 
 This page will show the Spatial autocorrelation analysis of the prices of the houses in Metro Manila. We can see if there are clusters of places with high prices and low prices with the Global and Local Spatial autocorrelation analysis.
 
-# 8. UI Prototype
+# 6. UI Prototype
 
 ![](images/feature1.png) ![](images/feature2.png) ![](images/feature3.png)
 
-# 10. Application Architecture
+# 7. Application Architecture
 
 ![](images/architecture.jpeg)
 
-# 11. Timeline
+# 8. Timeline
 
 |                                   | Week 8 | Week 9 | Week 10 | Week 11 | Week 12 | Week 13 |
-|:-----------------:|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|
+|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|
 | Research, Proposal & Prototyping  |   ⚫   |        |         |         |         |         |
 | Data Scraping, Data preprocessing |   ⚫   |   ⚫   |         |         |         |         |
 |        Building Feature 1         |        |   ⚫   |   ⚫    |   ⚫    |         |         |
