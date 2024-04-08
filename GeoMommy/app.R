@@ -14,7 +14,7 @@ ui <- fluidPage(
     tags$style(HTML(".navbar.navbar-default { background-color: #2caa4a !important; }"))
   ),
   navbarPage("GeoMommy",
-    tabPanel("EDA", kde_ui), 
+    tabPanel("EDA", kde_ui),
     tabPanel("Descriptive", gwr_ui),
     tabPanel("Predictive", gwrf_ui)
   )
@@ -28,3 +28,4 @@ server <- function(input, output) {
 
 # Run the application 
 shinyApp(ui = ui, server = server)
+

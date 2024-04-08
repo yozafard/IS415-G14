@@ -26,8 +26,8 @@ gwrf_ui <- tabPanel(
                   min = 1950,
                   max = 2024,
                   value = 2000),
-      submitButton(text = "Predict",
-                   icon("refresh"))
+      # submitButton(text = "Predict",
+                   # icon("refresh"))
       
     ),
     mainPanel(fluid = TRUE,
