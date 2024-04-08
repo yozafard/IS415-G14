@@ -48,8 +48,7 @@ kde_ui <- fluidPage(
                  # Define inputs here as done in the first tab
                  selectInput("var",
                              "Select Variable:",
-                             choices = c("Monthly Price" = "price_monthly", 
-                                         "Monthly Price (Log transformed)" = "log_price"
+                             choices = c("Monthly Price" = "price_monthly" 
                                          ),
                              selected = "price_monthly"
                 )
@@ -67,15 +66,11 @@ kde_ui <- fluidPage(
     tabPanel("Correlation Plot",
              sidebarLayout(
                sidebarPanel(
-               #   # Inputs specific to Variable Distribution
-               #   # Define inputs here as done in the first tab
-               #   selectInput("var",
-               #               "Select Variable:",
-               #               choices = c("Monthly Price" = "price_monthly", 
-               #                           "Monthly Price (Log transformed)" = "log_price"
-               #               ),
-               #               selected = "price_monthly"
-               #   )
+                 helpText("A correlation plot shows the pairwise correlations between variables. 
+                          It is useful for identifying relationships and potential trends in the data. 
+                          Each cell in the plot shows the correlation coefficient between two variables, 
+                          and the color and size of the cell may represent the strength and direction of the correlation.
+                          In our app, we deem those above 0.7 to be highly correlated and thus redundant"),
                ),
                mainPanel(
                  # Output for the Variable Distribution plot
@@ -95,7 +90,7 @@ kde_ui <- fluidPage(
                              "Select number of rows to show:",
                              10,
                              min=1,
-                             max=NA,
+                             max=200,
                              step=1,
                  )
                ),

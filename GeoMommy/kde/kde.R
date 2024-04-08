@@ -4,33 +4,6 @@ sf <- read_rds('./kde/data/mamikos_final.rds')
 sf <- sf |> st_transform(23834)
 jakarta <- read_rds('./kde/data/jakarta_sf.rds')
 jakarta <- jakarta |> st_transform(23834)
-
-# Define server logic required to draw a histogram
-# output$kdePlot <- renderPlot({
-# kde <- function(input, output, session) {
-  # get_owin <- function(city_name) {
-  #   if(city_name != "DKI Jakarta"){
-  #     city <- jakarta[jakarta$WADMKK == city_name, ]
-  #     owin <- as(as_Spatial(city), "owin")
-  #   }
-  #   else {
-  #     owin <- as.owin(jakarta)
-  #   }
-  #   return(owin)
-  # }
-  # 
-  # get_ppp <- function(city_name) {
-  #   coords <- st_coordinates(sf)
-  #   prices <- sf$price_monthly
-  #   ppp_with_price <- spatstat.geom::ppp(coords[,1], coords[,2], marks=prices, window=get_owin(city_name))
-  #   ppp_with_price <- rescale(ppp_with_price, 1000, "km")
-  #   return(ppp_with_price)
-  # }
-  # 
-  # get_kde <- function(city_name, bandwidth, kernel) {
-  #   kde_500 <- density(get_ppp(city_name), sigma = bandwidth, edge=TRUE, kernel=kernel)
-  #   return(kde_500)
-  # }
   
   output$kdePlot <- renderPlot({
     get_owin <- function(city_name) {
@@ -83,9 +56,10 @@ jakarta <- jakarta |> st_transform(23834)
            y = "Frequency")
   })
   
-  mamikos_no_geo <- sf |> st_drop_geometry()
+  # mamikos_no_geo <- sf |> st_drop_geometry()
     
   output$corrPlot <- renderPlot({
+    mamikos_no_geo <- sf |> st_drop_geometry()
     corrplot(cor(mamikos_no_geo |> dplyr::select(-c("x_id", "price_monthly"))),
            diag = FALSE, 
            order = "AOE",
@@ -96,7 +70,9 @@ jakarta <- jakarta |> st_transform(23834)
   })
   
   output$dataTable <- DT::renderDataTable({
+    mamikos_no_geo <- sf |> st_drop_geometry()
     # Assuming `sf` is the data frame you want to display
     # You may want to remove geometry columns or other preprocessing
+    print(mamikos_no_geo)
     DT::datatable(mamikos_no_geo, options = list(pageLength = input$num, scrollX = TRUE))
   })
