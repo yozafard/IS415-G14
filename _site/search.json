@@ -11,7 +11,7 @@
     "href": "Deliverables/Proposal.html#data-preparation",
     "title": "Project Proposal",
     "section": "5.1 Data Preparation",
-    "text": "5.1 Data Preparation\n\n1. Data Sourcing\nOur dataset will be sourced from Mamikos, a property rental platform in Indonesia.\n\n\n2. Data Importing\nThe data importing will leverage on R libraries, such as dplyr for aspatial data, and sf for geospatial data\n\n\n3. Data Wrangling\nThe imported data undergoes cleaning and preprocessing to address missing values, outliers, and inconsistencies. This stage may involve normalization, encoding categorical variables, and data transformation to ensure compatibility with analysis methods."
+    "text": "5.1 Data Preparation\n\n1. Data Sourcing\nOur dataset will be sourced from Mamikos, a property rental platform in Indonesia. We will be focusing only on Jakarta’s rental\n\n\n2. Data Importing\nThe data importing will leverage on R libraries, such as dplyr for aspatial data, and sf for geospatial data\n\n\n3. Data Wrangling\nThe imported data undergoes cleaning and preprocessing to address missing values, outliers, and inconsistencies. This stage may involve normalization, encoding categorical variables, and data transformation to ensure compatibility with analysis methods."
   },
   {
     "objectID": "Deliverables/Proposal.html#exploratory-data-analysis",
@@ -313,5 +313,33 @@
     "title": "IS415-G14",
     "section": "",
     "text": "pacman::p_load(car, olsrr, corrplot, ggpubr, sf, spdep, GWmodel, tmap, tidyverse, gtsummary)\n\n\nmamikos_sf &lt;- read_rds(\"data/mamikos_sf.rds\")\nmamikos_full &lt;- read_rds(\"data/mamikos_full.rds\")\nbw &lt;- read_rds(\"data/bw.rds\")\ngwr &lt;- read_rds(\"data/gwr.rds\")\njakarta_sf &lt;- read_rds(\"data/jakarta_sf.rds\")\n\n\nmamikos_full &lt;- mamikos_full |&gt;\n  mutate(log_price = log(price_monthly))\n\n\nggplot(mamikos_full, aes(x = log_price)) +\n  geom_histogram(bins = 30, fill = \"#2caa4a\", color = \"black\") +\n  labs(title = \"Log-Transformed Monthly Price Distribution\",\n       x = \"Log Monthly Price (IDR)\",\n       y = \"Frequency\")\n\n\n\n\n\nmamikos_sp &lt;- as_Spatial(mamikos_full)\ngwr_sf &lt;- gwr$SDF |&gt; st_as_sf() |&gt; st_transform(crs = 4326)\n\n\njakarta_gwr &lt;- jakarta_sf |&gt;\n  st_join(gwr_sf) |&gt; # Join data within the polygons\n  group_by(geometry) |&gt; # Group by some unique identifier for jakarta_sf polygons\n  summarise(across(where(is.numeric), ~mean(.x, na.rm = TRUE)), .groups = \"drop\")\n\n\nwrite_rds(jakarta_gwr, \"data/jakarta_gwr.rds\")\n\n\nmamikos_palette &lt;- colorRampPalette(c(\"#f95516\", \"#dbdbdb\", \"#2caa4a\"))(100)\n\ntmap_mode(\"view\")\n\ntmap mode set to interactive viewing\n\ntm_shape(jakarta_gwr) +  # Your spatial polygons data\n  tm_polygons(col=\"size\",  # The variable to color by\n              style=\"quantile\",  # The method for creating color breaks\n              palette=mamikos_palette,  # Your chosen color palette\n              title=\"Local R2\") +  # Legend title\n  tm_view(set.zoom.limits = c(11,14))  # Set zoom limits\n\nVariable(s) \"size\" contains positive and negative values, so midpoint is set to 0. Set midpoint = NA to show the full spectrum of the color palette.\n\n\n\n\n\n\ntmap_mode(\"plot\")\n\ntmap mode set to plotting"
+  },
+  {
+    "objectID": "Deliverables/Proposal.html#a-spatial-regression-model-for-predicting-prices-of-short-term-rentals-in-athens-greece",
+    "href": "Deliverables/Proposal.html#a-spatial-regression-model-for-predicting-prices-of-short-term-rentals-in-athens-greece",
+    "title": "Project Proposal",
+    "section": "4.1 A Spatial Regression Model for Predicting Prices of Short-Term Rentals in Athens, Greece",
+    "text": "4.1 A Spatial Regression Model for Predicting Prices of Short-Term Rentals in Athens, Greece\n\nObjective\nexplores the factors affecting the prices of short-term rental properties listed on Airbnb in Athens, Greece. Using spatial data analysis, the study focuses on identifying significant predictors of rental prices, including property features, host attributes, review characteristics, and various location attributes\n\n\nMethodology\n\nMultiple Regression Analysis (Ordinary Least Squares)\n\nExplains the regression of a dependent variable over more than one independent variable\n\nGeographically Weighted Regression\n\nA linear regression model which pays more attention to the local regression based on spatial relationship\n\n\nLearning points\n\nConsistent across studies is the finding that location significantly influences short-term rental prices. Proximity to tourist attractions, amenities, and transport links are pivotal in determining price points.\nThe characteristics of the property, such as the number of bedrooms and bathrooms, along with host-related factors like reviews and superhost status, play a crucial role in pricing\n\n\nAreas for improvement\nconcentrate on the rentals with high residuals and analyze the neighborhood characteristics and the amenities they offer. In addition, replacing Euclidean distances with distances along the road network might improve the results of the OLS model"
+  },
+  {
+    "objectID": "Deliverables/Proposal.html#exploratory-data-analysis-1",
+    "href": "Deliverables/Proposal.html#exploratory-data-analysis-1",
+    "title": "Project Proposal",
+    "section": "5.1 Exploratory Data Analysis",
+    "text": "5.1 Exploratory Data Analysis\n\nHistogram to show distribution of different variables\nCorrelation plot of the variables Browse through the dataset with a table\nKernel Density Map of the different cities in Jakarta Adjustable bandwidth (in kilometres) and kernel method"
+  },
+  {
+    "objectID": "Deliverables/Proposal.html#descriptive-analysis",
+    "href": "Deliverables/Proposal.html#descriptive-analysis",
+    "title": "Project Proposal",
+    "section": "5.2 Descriptive Analysis",
+    "text": "5.2 Descriptive Analysis\n\nShow insights on local importance of features that explains the price of the rental units\nUsers can adjust the configuration of both the GWR and MLR models to perform a descriptive analysis of the value of rental units in Jakarta"
+  },
+  {
+    "objectID": "Deliverables/Proposal.html#predictive-analysis",
+    "href": "Deliverables/Proposal.html#predictive-analysis",
+    "title": "Project Proposal",
+    "section": "5.3 Predictive Analysis",
+    "text": "5.3 Predictive Analysis\n\nPredicts the price of the rental units based on the user input according to the chosen model (GWRF or MLR)\nDisplays the performance of each model in terms of the predictions of the rental unit prices"
   }
 ]
