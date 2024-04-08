@@ -1,4 +1,4 @@
-pacman::p_load(shiny, shinycssloaders, car, olsrr, corrplot, ggpubr, sf, spdep, GWmodel, tmap, tidyverse, gtsummary, tidygeocoder)
+pacman::p_load(shiny, shinycssloaders, car, olsrr, corrplot, ggpubr, sf, spdep, GWmodel, tmap, tidyverse, gtsummary, tidygeocoder, SpatialML, tmap, rsample, MLmetrics)
 library(leaflet)
 library(leaflet.extras)
 library(bslib)  

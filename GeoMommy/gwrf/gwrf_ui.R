@@ -4,8 +4,8 @@ gwrf_ui <- tabPanel(
     sidebarPanel(
       selectInput(inputId = "model",
                   label = "Select Model",
-                  choices = c("Geographically Weighted Random Forest",
-                              "Multilinear Regression")),
+                  choices = c("Multiple Linear Regression",
+                              "Geographically Weighted Random Forest")),
       textInput(inputId = "searchBar",
                 label = "Search Location",
                 placeholder = "Type address here"),
@@ -26,9 +26,8 @@ gwrf_ui <- tabPanel(
                   min = 1950,
                   max = 2024,
                   value = 2000),
-      # submitButton(text = "Predict",
-                   # icon("refresh"))
-      
+
+      actionButton(inputId = "predict", label = "Predict")
     ),
     mainPanel(fluid = TRUE,
       tabsetPanel(
@@ -37,7 +36,7 @@ gwrf_ui <- tabPanel(
           fluidRow(
             column(
               width = 12,
-              shinycssloaders::withSpinner(leafletOutput("GWRFMap")
+              shinycssloaders::withSpinner(leafletOutput("GWRFMap"), type = 8, color = "#2caa4a"
             )
           ), fluidRow(
             column(
@@ -47,7 +46,16 @@ gwrf_ui <- tabPanel(
           ))),
         tabPanel(
           "Model Performance",
-          shinycssloaders::withSpinner(plotOutput("GWRFPlot"))
+          fluidRow(
+            column(
+              width = 12,
+              shinycssloaders::withSpinner(plotOutput("GWRFPlot"), type = 8, color = "#2caa4a"
+              )
+            ), fluidRow(
+              column(
+                width = 12,
+                textOutput("ModelText"))
+            ))
         ),
       )
     )

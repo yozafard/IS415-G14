@@ -1,0 +1,38 @@
+```{r}
+pacman::p_load(car, olsrr, corrplot, ggpubr, sf, spdep, GWmodel, tmap, tidyverse, gtsummary, tidygeocoder, GWmodel, SpatialML, tmap, rsample, Metrics)
+mamikos_final <- readRDS("gwrf/data/mamikos_final.rds")
+mamikos_data <- mamikos_final |> dplyr::select(c(x_id, price_monthly, gender, size, building_year, prox_airport, prox_gereja, prox_kantorpos, prox_kesehatan, prox_masjid, prox_stasiunka, prox_vihara, pendidikan_within_med, pura_within_med))
+mamikos_split <- initial_split(mamikos_data[, -1], 
+                              prop = 8/10,)
+train_data <- training(mamikos_split)
+test_data <- testing(mamikos_split)
+
+#store the coordinates to be used in the gwrf model
+coords_train <- st_coordinates(train_data)
+coords_test <- st_coordinates(test_data)
+
+#drop the geometry in the train data
+train_data_nogeo <- train_data |> st_drop_geometry()
+
+#train and save the model
+set.seed(1234)
+gwRF_adaptive <- grf(formula = price_monthly ~ gender + size + building_year + prox_airport + prox_gereja + prox_kantorpos + prox_kesehatan + prox_masjid + prox_stasiunka + prox_vihara + pendidikan_within_med + pura_within_med,
+                     dframe=train_data_nogeo, 
+                     bw=41,
+                     kernel="adaptive",
+                     coords=coords_train)
+write_rds(gwRF_adaptive, "gwrf/data/model/GWRF_model2.rds")
+
+#combine the coordinates of the test data
+test_data <- cbind(test_data, coords_test) |>
+  st_drop_geometry()
+
+#predict the test dataset
+gwRF_pred <- predict.grf(gwRF_adaptive, 
+                           test_data, 
+                           x.var.name="X",
+                           y.var.name="Y", 
+                           local.w=1,
+                           global.w=0)
+write_rds(gwRF_pred, "gwrf/data/GWRF_pred2.rds")
+```

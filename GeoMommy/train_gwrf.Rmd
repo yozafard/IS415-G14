@@ -1,0 +1,299 @@
+```{r}
+mamikos_final <- readRDS("gwrf/data/mamikos_final.rds")
+
+```
+```{r}
+pacman::p_load(caret,tidyverse, tmap, sf, spdep, GWmodel, SpatialML, rsample, tidymodels, gtsummary, rpart, rpart.plot, ggstatsplot, performance, geosphere, stringr, matrixStats)
+# drop the variables that are strongly correlated
+mamikos_full_nogeo <- st_drop_geometry(mamikos_final)
+mamikos_corr = cor(mamikos_full_nogeo)
+hc = findCorrelation(mamikos_corr, cutoff=0.7) # put any value as a "cutoff" 
+hc = sort(hc)
+mamikos_new_corr = mamikos_full[,-c(hc)]
+print(mamikos_new_corr)
+```
+```{r}
+#plot to correlation plot to seee if there are still correlated variables
+corrplot::corrplot(cor(st_drop_geometry(mamikos_new_corr)[, -1]),
+                   diag = FALSE,
+                   order = "AOE",
+                   tl.pos = "td", 
+                   tl.cex = 0.5, 
+                   method = "number", 
+                   type = "upper")
+```
+```{r}
+# the the correlation filtering again
+mamikos_corr2 = cor(st_drop_geometry(mamikos_new_corr))
+hc2 = findCorrelation(mamikos_corr2, cutoff=0.7) # put any value as a "cutoff" 
+hc2 = sort(hc2)
+mamikos_final_corr = mamikos_new_corr[,-c(hc2)]
+print(mamikos_final_corr)
+write_rds(mamikos_final_corr, "gwrf/data/mamikos_final_corr.rds")
+```
+```{r}
+# check if there are still any strong correlation
+corrplot::corrplot(cor(st_drop_geometry(mamikos_final_corr)[, -1]),
+                   diag = FALSE,
+                   order = "AOE",
+                   tl.pos = "td", 
+                   tl.cex = 0.5, 
+                   method = "number", 
+                   type = "upper")
+```
+```{r}
+#split the train and test data
+mamikos_final_corr <- readRDS("gwrf/data/mamikos_final_corr.rds")
+mamikos_data <- mamikos_final |> select(c(x_id, price_monthly, gender, size, building_year, prox_airport, prox_gereja, prox_kantorpos, prox_kesehatan, prox_masjid, prox_stasiunka, prox_vihara, pendidikan_within_med, pura_within_med))
+mamikos_sample <- mamikos_data |> slice_sample(n = 5000)
+mamikos_split <- initial_split(mamikos_data[, -1], 
+                              prop = 8/10,)
+train_data <- training(mamikos_split)
+test_data <- testing(mamikos_split)
+```
+```{r}
+#store the coordinates to be used in the gwrf model
+coords_train <- st_coordinates(train_data)
+coords_test <- st_coordinates(test_data)
+```
+```{r}
+#make the train data as Spatial data
+train_data_sp <- as_Spatial(train_data)
+```
+```{r}
+#find the adaptive bandwidth
+bw_adaptive <- bw.gwr(price_monthly ~ gender + size + building_year + prox_airport + prox_gereja + prox_kantorpos + prox_kesehatan + prox_masjid + prox_stasiunka + prox_vihara + pendidikan_within_med + pura_within_med,
+                  data=train_data_sp,
+                  approach="CV",
+                  kernel="gaussian",
+                  adaptive=TRUE,
+                  longlat=FALSE,
+                  parallel.method = "omp")
+```
+```{r}
+#save the adaptive bandwidth
+write_rds(bw_adaptive, "gwrf/data/model/bw_adaptive_6915rows.rds")
+```
+
+```{r}
+#load bandwidth
+bw_adaptive_6915 <- readRDS("gwrf/data/model/bw_adaptive_6915rows.rds")
+```
+
+```{r}
+#drop the geometry in the train data
+train_data_nogeo <- train_data |> st_drop_geometry()
+```
+```{r}
+#train and save the model
+set.seed(1234)
+gwRF_adaptive <- grf(formula = price_monthly ~ gender + size + building_year + prox_airport + prox_gereja + prox_kantorpos + prox_kesehatan + prox_masjid + prox_stasiunka + prox_vihara + pendidikan_within_med + pura_within_med,
+                     dframe=train_data_nogeo, 
+                     bw=bw_adaptive,
+                     kernel="adaptive",
+                     coords=coords_train)
+write_rds(gwRF_adaptive, "gwrf/data/model/GWRF_model.rds")
+```
+```{r}
+#combine the coordinates of the test data
+test_data <- cbind(test_data, coords_test) |>
+  st_drop_geometry()
+```
+```{r}
+#predict the test dataset
+gwRF_pred <- predict.grf(gwRF_adaptive, 
+                           test_data, 
+                           x.var.name="X",
+                           y.var.name="Y", 
+                           local.w=1,
+                           global.w=0)
+```
+
+```{r}
+install.packages("MLmetrics")
+library(MLmetrics)
+MAPE(test_data$price_monthly, test_data$gwRF_pred)
+```
+
+```{r}
+mamikos <- read_csv("gwrf/data/mamikos.csv")
+```
+```{r}
+mamikos_no_test <- mamikos[!grepl('test', mamikos$url),]
+```
+```{r}
+glimpse(mamikos_no_test)
+```
+```{r}
+mamikos_trx <- mamikos_no_test[mamikos_no_test$number_success_owner_trx > 0 && mamikos_no_test$number_success_kos_trx > 0,]
+```
+```{r}
+mamikos_trx <- mamikos_no_test[rowSums(mamikos_no_test[, c("number_success_owner_trx", "number_success_kos_trx")])>0, ]
+```
+```{r}
+mamikos_clean <- mamikos_trx %>% select(c("_id", "price_monthly", "building_year", "latitude", "longitude", "gender", "size", "is_singgahsini", "is_apik", "is_elite", "number_success_owner_trx", "number_success_kos_trx"))
+```
+```{r}
+write_rds(mamikos_clean, "gwrf/data/mamikos_clean.rds")
+```
+```{r}
+calculate_area <-  function(size_string) {
+  # Deal with potential NA values upfront
+  if (is.na(size_string)) {
+    return(NA)
+  }
+  
+  # lowercase the string for easier matching
+  size <- tolower(size_string)
+  
+  # Replace all non-standard x's and commas with a standard format
+  size <- gsub("×", "x", size)
+  
+  # Normalize decimal separator from comma to dot and remove spaces
+  size <- gsub(",\\s*", ".", size) # Changes "2,5 x 3" to "2.5 x 3"
+  
+  # Remove any "m2" text, assuming that the presence of 'x' or '×' already denotes area calculation
+  size <- gsub("m2", "", size, ignore.case = TRUE)
+  
+  # Extract numeric values
+  numbers <- as.numeric(unlist(str_extract_all(size, "[0-9.]+")))
+  
+  # Simple heuristic: if more than 2 numbers, take first two assuming additional info is irrelevant
+  if (length(numbers) > 2) {
+    numbers <- numbers[1:2]
+  }
+  
+  # Calculate the area; if it's a single number, assume it's already the area
+  area <- if (length(numbers) == 2) prod(numbers) else if (length(numbers) == 1) numbers else 0
+  
+  if (area > 10000) {
+    area <- area / 10000
+  } else if (area > 100) {
+    area <- area / 100
+  } else if (area == 0 ) {
+    area <- NA
+  }
+  
+  return (area)
+}
+```
+```{r}
+mamikos <- mamikos_clean |>
+  mutate(size = sapply(size, calculate_area))
+```
+```{r}
+mamikos <- mamikos |>
+  filter(building_year > 0)
+```
+```{r}
+mamikos <- mamikos |> 
+  drop_na()
+```
+```{r}
+mamikos_sf <- st_as_sf(mamikos, coords = c("longitude", "latitude"), crs=4326)
+```
+```{r}
+jakarta <- readRDS("gwrf/data/jakarta.rds")
+```
+```{r}
+mamikos_sf <- st_intersection(mamikos_sf, jakarta)
+mamikos_sf <- mamikos_sf |> select(c("X_id", "price_monthly", "building_year", "gender", "size", "geometry"))
+```
+```{r}
+write_rds(mamikos_sf, "gwrf/data/mamikos_sf.rds")
+```
+```{r}
+poi <- readRDS("gwrf/data/poi.rds")
+```
+```{r}
+mamikos_sf <- readRDS("gwrf/data/mamikos_sf.rds")
+distance <- st_distance(mamikos_sf, poi)
+distance <- data.frame(distance)
+colnames(distance) <- poi$REMARK
+rownames(distance) <- mamikos_sf$`X_id`
+```
+```{r}
+rm_unit <- function(x) {
+  as.numeric(str_sub(x, 1, -4))
+}
+distance_rmv_unit <- sapply(distance, rm_unit)
+rownames(distance_rmv_unit) <- mamikos_sf$`X_id`
+distance <- as.data.frame(distance)
+distance$id <- as.numeric(rownames(distance))
+distance_pair <- distance |> pivot_longer(!id, names_to = "POI", values_to = "Distance")
+saveRDS(distance_pair, "gwrf/data/distance_pair.rds")
+```
+
+```{r}
+distance_min_prox <- distance_pair |> 
+  group_by(id, POI) |> 
+  summarise(min_distance = min(Distance)) |>
+  pivot_wider(names_from = POI, values_from = min_distance)
+
+saveRDS(distance_min_prox, "gwrf/data/distance_min_prox.rds")
+```
+```{r}
+distance_within <- distance_pair |>
+  group_by(id) |> 
+  summarise(airport_within_10km = sum(POI == "AIRPORT" & Distance <= 10000), 
+            stasiunka_within_med = sum(POI == "STASIUNKA" & Distance <= stasiunka_med), 
+            kesehatan_within_med = sum(POI == "KESEHATAN" & Distance <= kesehatan_med), 
+            kantorpos_within_med = sum(POI == "KANTORPOS" & Distance <= kantorpos_med), 
+            masjid_within_med = sum(POI == "Masjid" & Distance <= masjid_med),
+            gereja_within_med = sum(POI == "Gereja" & Distance <= gereja_med),
+            vihara_within_med = sum(POI == "Vihara" & Distance <= vihara_med),
+            pura_within_med = sum(POI == "Pura" & Distance <= pura_med),
+            other_saranaibadah_within_med = sum(POI == "Peribadatan/Sosial Lainnya" & Distance <= other_saranaibadah_med),
+            pendidikan_within_med = sum(POI == "PENDIDIKAN" & Distance <= pendidikan_med))
+
+
+saveRDS(distance_within, "gwrf/data/distance_within.rds")
+```
+```{r}
+mamikos_full <- left_join(mamikos_sf, distance_min_prox, by = c("X_id" = "id")) |> left_join(distance_within, by = c("X_id" = "id"))
+mamikos_full <- rename(mamikos_full, "PROX_AIRPORT" = "AIRPORT", "PROX_STASIUNKA" = "STASIUNKA", "PROX_KESEHATAN" = "KESEHATAN", "PROX_KANTORPOS" = "KANTORPOS", "PROX_MASJID" = "Masjid", "PROX_GEREJA" = "Gereja", "PROX_VIHARA" = "Vihara", "PROX_PURA" = "Pura", "PROX_OTHER_SARANAIBADAH" = "Peribadatan/Sosial Lainnya", "AIRPORT_WITHIN_10KM" = "airport_within_10km", "STASIUNKA_WITHIN_MED" = "stasiunka_within_med", "KESEHATAN_WITHIN_MED" = "kesehatan_within_med", "KANTORPOS_WITHIN_MED" = "kantorpos_within_med", "MASJID_WITHIN_MED" = "masjid_within_med", "GEREJA_WITHIN_MED" = "gereja_within_med", "VIHARA_WITHIN_MED" = "vihara_within_med", "PURA_WITHIN_MED" = "pura_within_med", "OTHER_SARANAIBADAH_WITHIN_MED" = "other_saranaibadah_within_med", "PROX_PENDIDIKAN" = "PENDIDIKAN", "PENDIDIKAN_WITHIN_MED" = "pendidikan_within_med")
+
+names(mamikos_full) <- tolower(names(mamikos_full))
+saveRDS(mamikos_full, "gwrf/data/mamikos_final.rds")
+```
+
+```{r}
+write_rds(pendidikan_med, "gwrf/data/pendidikan_med.rds")
+```
+```{r}
+mlr <- lm(formula = price_monthly ~ gender + size + building_year + prox_airport + prox_gereja + prox_kantorpos + prox_kesehatan + prox_masjid + prox_stasiunka + prox_vihara + pendidikan_within_med + pura_within_med, data = train_data)
+summary(mlr)
+```
+```{r}
+write_rds(mlr, "gwrf/data/model/mlr.rds")
+```
+```{r}
+mlr_pred <- predict(mlr, test_data)
+MAPE(test_data$price_monthly, mlr_pred)
+```
+```{r}
+write_rds(pura_med, "gwrf/data/pura_med.rds")
+```
+
+```{r}
+input <- data.frame(addr = "Jakarta", lat = -6.208745, long = 106.8387, gender = 0, building_year = 2022, size = 12)
+input_sf <- st_as_sf(input, coords = c("long", "lat"), crs=4326)
+```
+
+```{r}
+distance_input <- st_distance(input_sf, poi)
+distance_input <- data.frame(distance_input)
+colnames(distance_input) <- poi$REMARK
+rownames(distance_input) <- input_sf$addr
+
+distance_input <- sapply(distance_input, rm_unit)
+rownames(distance_input) <- input_sf$addr
+distance_input <- as.data.frame(distance_input)
+distance_input$id <- rownames(distance_input)
+```
+```{r}
+
+```
+```{r}
+```
+

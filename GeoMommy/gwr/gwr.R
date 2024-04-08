@@ -1,12 +1,13 @@
 pacman::p_load(car, olsrr, corrplot, ggpubr, sf, spdep, GWmodel, tmap, tidyverse, gtsummary)
 
+mlrd <- readRDS("gwr/data/mlr.rds")
 jakarta_sf <- readRDS("gwr/data/jakarta_sf.rds")
 mamikos_final <- read_rds("gwr/data/mamikos_final.rds")
 mamikos_mlr <- mamikos_final |> 
-  cbind(mlr$fitted.values) |> 
-  cbind(mlr$residuals) |>
-  cbind(mlr$model$price_monthly) |>
-  rename(`residuals` = `mlr.residuals`, `fitted values` = `mlr.fitted.values`, `actual values` = `mlr.model.price_monthly`)
+  cbind(mlrd$fitted.values) |> 
+  cbind(mlrd$residuals) |>
+  cbind(mlrd$model$price_monthly) |>
+  rename(`residuals` = `mlrd.residuals`, `fitted values` = `mlrd.fitted.values`, `actual values` = `mlrd.model.price_monthly`)
 
 jakarta_mlr <-  jakarta_sf |>
   st_join(mamikos_mlr) |> 
@@ -15,8 +16,6 @@ jakarta_mlr <-  jakarta_sf |>
             .groups = "drop")
 
 mamikos_palette <- colorRampPalette(c("#f95516", "#dbdbdb", "#2caa4a"))(100)
-
-mlr <- readRDS("gwr/data/mlr.rds")
 
 # Server logic for GWR
 output$GWRPlot <- renderTmap({
