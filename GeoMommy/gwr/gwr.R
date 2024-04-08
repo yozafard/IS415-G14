@@ -1,20 +1,67 @@
 pacman::p_load(car, olsrr, corrplot, ggpubr, sf, spdep, GWmodel, tmap, tidyverse, gtsummary)
 
-jakarta_gwr <- read_rds("gwr/data/jakarta_gwr.rds")
+jakarta_sf <- readRDS("gwr/data/jakarta_sf.rds")
+mamikos_final <- read_rds("gwr/data/mamikos_final.rds")
+mamikos_mlr <- mamikos_final |> 
+  cbind(mlr$fitted.values) |> 
+  cbind(mlr$residuals) |>
+  cbind(mlr$model$price_monthly) |>
+  rename(`residuals` = `mlr.residuals`, `fitted values` = `mlr.fitted.values`, `actual values` = `mlr.model.price_monthly`)
+
+jakarta_mlr <-  jakarta_sf |>
+  st_join(mamikos_mlr) |> 
+  group_by(geometry, NAMOBJ) |> 
+  summarise(across(where(is.numeric), ~mean(.x, na.rm = TRUE)),
+            .groups = "drop")
+
 mamikos_palette <- colorRampPalette(c("#f95516", "#dbdbdb", "#2caa4a"))(100)
+
+mlr <- readRDS("gwr/data/mlr.rds")
 
 # Server logic for GWR
 output$GWRPlot <- renderTmap({
-  plotted_coefficient <- input$coef
+  plotted_coefficient <- input$gwr_coef
+  
+  bw <- input$bw
+  bwc <- input$bwc
+  dist <- input$dist
+  kernel <- input$gwr_kernel
+  
+  # Load the processed GWR model
+  fname <- paste0("gwr/data/jakarta_gwr/", bw, "_", bwc, "_", dist, "_", kernel, ".rds")
+  jakarta_gwr <- readRDS(fname)
+  
   # Use the reverse palette for the standard error
   paletteToUse <- if(plotted_coefficient == "size_SE") rev(mamikos_palette) else mamikos_palette
   
   tmap_mode("view")
-  map <- tm_shape(jakarta_gwr) +  # Your spatial polygons data
-    tm_polygons(col=input$coef,  # The variable to color by
-                style="quantile",  # The method for creating color breaks
-                palette=mamikos_palette,  # Your chosen color palette
-                title=input$coef) +  # Legend title
+  map <- tm_shape(jakarta_gwr) +
+    tm_fill(col=input$gwr_coef,
+            style="quantile",
+            palette=paletteToUse,
+            title=input$gwr_coef,
+            midpoint = 0,
+            popup.vars=c('size'='size')) +
+    tm_borders() +
+    tm_view(set.zoom.limits = c(11,14))  # Set zoom limits
+  map
+})
+
+output$MLRDPlot <- renderTmap({
+  
+  plotted_coefficient <- input$mlr_coef
+  # Use the reverse palette for the standard error
+  paletteToUse <- if(plotted_coefficient == "size_SE") rev(mamikos_palette) else mamikos_palette
+  
+  tmap_mode("view")
+  map <- tm_shape(jakarta_mlr) +
+    tm_fill(col=input$mlr_coef,
+            style="quantile",
+            palette=paletteToUse,
+            title=input$mlr_coef,
+            midpoint = 0,
+            popup.vars=c('size'='size')) +
+    tm_borders() +
     tm_view(set.zoom.limits = c(11,14))  # Set zoom limits
   map
 })
