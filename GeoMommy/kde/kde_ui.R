@@ -48,7 +48,9 @@ kde_ui <- fluidPage(
                  # Define inputs here as done in the first tab
                  selectInput("var",
                              "Select Variable:",
-                             choices = c("Monthly Price" = "price_monthly" 
+                             choices = c("Monthly Price" = "price_monthly",
+                                         "Monthly Price (log transformed)" = "log_price"
+                                         
                                          ),
                              selected = "price_monthly"
                 )
@@ -81,27 +83,21 @@ kde_ui <- fluidPage(
              )
     ),
     
-    # tabPanel("Data Table",
-    #          sidebarLayout(
-    #            sidebarPanel(
-    #            #   # Inputs specific to Variable Distribution
-    #            #   # Define inputs here as done in the first tab
-    #              numericInput("num",
-    #                          "Select number of rows to show:",
-    #                          10,
-    #                          min=1,
-    #                          max=200,
-    #                          step=1,
-    #              )
-    #            ),
-    #            mainPanel(
-    #              # Output for the Variable Distribution plot
-    #              # Define plotOutput or other output here
-    #              shinycssloaders::withSpinner(tableOutput("dataTable"), type = 8, color = "#2caa4a")
-    #              
-    #            )
-    #          )
-    # ),
+    tabPanel("Data Table",
+             sidebarLayout(
+               sidebarPanel(
+                helpText("
+                         This is the Data Table
+                         ")
+               ),
+               mainPanel(
+                 # Output for the Variable Distribution plot
+                 # Define plotOutput or other output here
+                 shinycssloaders::withSpinner(dataTableOutput("dataTable"), type = 8, color = "#2caa4a")
+
+               )
+             )
+    ),
   )
 )
 

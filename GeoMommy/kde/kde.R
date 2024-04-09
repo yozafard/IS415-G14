@@ -46,6 +46,10 @@ jakarta <- jakarta |> st_transform(23834)
   output$varDistPlot <- renderPlot({
     # Retrieve the name of the variable to plot
     var_name <- input$var
+    if (input$var == "log_price") {
+      sf <- sf |>
+        mutate(log_price = log(price_monthly))
+    }
     print(paste("Plotting variable:", var_name)) # For debugging
     
     # Create the plot
@@ -70,9 +74,9 @@ jakarta <- jakarta |> st_transform(23834)
   })
   
   output$dataTable <- DT::renderDataTable({
-    mamikos_no_geo <- sf |> st_drop_geometry()
+    # mamikos_no_geo <- sf |> st_drop_geometry()
     # Assuming `sf` is the data frame you want to display
     # You may want to remove geometry columns or other preprocessing
-    print(mamikos_no_geo)
-    DT::datatable(mamikos_no_geo, options = list(pageLength = input$num, scrollX = TRUE))
+    print(sf)
+    DT::datatable(sf, options = list(pageLength = input$num, scrollX = TRUE))
   })
