@@ -61,17 +61,25 @@ Key distributions and relationships within the data are visualized using histogr
 
 KDE plots help identify the density of rental properties across the city, offering insights into high-demand areas and potential patterns of spatial clustering. Price will also be used as a weight in the calculation, to offer more insight on high price rentals
 
-## 3.1 Hedonic Pricing Model - Ordinary Least Squares Regression
+## 5.3 Descriptive Analytics
 
-This foundational model assesses the impact of various property and location-specific factors on rental prices. OLS regression facilitates the estimation of coefficients for each determinant, providing a baseline for comparison with more complex models.
+### 1. Multiple Linear Regression
 
-Results from the OLS model are evaluated to determine the significance and impact of each variable. This involves examining R-squared values, p-values, and coefficient sizes to assess model fit and variable importance.
+idk what to put
 
-## 3.2 Geographically Weighted Regression
+### 2. Geographically Weighted Regression
 
-Building on the OLS model, GWR introduces spatial variation in coefficients, allowing for the examination of how the impact of determinants on rental prices varies across different locations.
+Using Geographically Weighted Regression, we are aiming to give users an insight of how each feature affects the price of rental units in each region
 
-The results of GWR are compared to the OLS model to understand the benefits of incorporating spatial data. This comparison highlights the spatial non-stationarity of relationships between rental prices and their determinants.
+## 5.4 Predictive Analytics
+
+### 1. Multiple Linear Regression
+
+We are using a standard Multiple Linear Regression to predict the price of a rental unit, based on user inputs. The user inputs would be location (taken from the address that the user inputted), the gender of the room (if it's a mixed unit, male-only, or female-only), size of the unit in meter square, and the year that the building is built or last renovated.
+
+### 2. Geographically Weighted Random Forest
+
+Building on the Multiple Linear Regression, we wanted to improve it further by introducing location as a geospatial feature to add more weight for closer units.
 
 ## 3.3 Geographically Weighted Random Forest
 

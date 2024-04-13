@@ -95,7 +95,7 @@
     "href": "index.html",
     "title": "GeoMommy",
     "section": "",
-    "text": "Welcome to GeoMommy Project page\nWe are a group of 3, working on to make a room rental unit analysis in Jakarta. So, wait for more updates by visiting this page. Thank you!\n\nProject Proposal"
+    "text": "Welcome to GeoMommy Project page\nWe are a group of 3, working on to make a room rental unit analysis in Jakarta. So, wait for more updates by visiting this page. Thank you!\n\nAbstract\nThis project investigates room rental price prediction in Jakarta using geospatial analysis methods to assist home owners, property agents, and potential business owners in the rental market. Through Geospatial Weighted Regression, both descriptive and predictive methods, and Kernel Density Estimation techniques, we explore the spatial dynamics and determinants of rental prices across Jakarta’s diverse neighborhoods. By analyzing publicly available datasets and employing machine learning algorithms, we uncover spatial patterns, identify high-demand areas, and segment neighborhoods based on rental price similarities. The project culminates in the development of interactive visualizations that convey insights intuitively, facilitating informed decision making and strategic planning in Jakarta’s evolving rental market.\n\n\nImportant Links\n\nProject Proposal\nProject Poster"
   },
   {
     "objectID": "satelilit/index.html",
@@ -341,5 +341,26 @@
     "title": "Project Proposal",
     "section": "5.3 Predictive Analysis",
     "text": "5.3 Predictive Analysis\n\nPredicts the price of the rental units based on the user input according to the chosen model (GWRF or MLR)\nDisplays the performance of each model in terms of the predictions of the rental unit prices"
+  },
+  {
+    "objectID": "Deliverables/Proposal.html#descriptive-analytics",
+    "href": "Deliverables/Proposal.html#descriptive-analytics",
+    "title": "Project Proposal",
+    "section": "5.3 Descriptive Analytics",
+    "text": "5.3 Descriptive Analytics\n\n1. Multiple Linear Regression\nidk what to put\n\n\n2. Geographically Weighted Regression\nUsing Geographically Weighted Regression, we are aiming to give users an insight of how each feature affects the price of rental units in each region"
+  },
+  {
+    "objectID": "Deliverables/Proposal.html#predictive-analytics",
+    "href": "Deliverables/Proposal.html#predictive-analytics",
+    "title": "Project Proposal",
+    "section": "5.4 Predictive Analytics",
+    "text": "5.4 Predictive Analytics\n\n1. Multiple Linear Regression\nWe are using a standard Multiple Linear Regression to predict the price of a rental unit, based on user inputs. The user inputs would be location (taken from the address that the user inputted), the gender of the room (if it’s a mixed unit, male-only, or female-only), size of the unit in meter square, and the year that the building is built or last renovated.\n\n\n2. Geographically Weighted Random Forest\nBuilding on the Multiple Linear Regression, we wanted to improve it further by introducing location as a geospatial feature to add more weight for closer units."
+  },
+  {
+    "objectID": "Deliverables/Proposal.html#geographically-weighted-random-forest-1",
+    "href": "Deliverables/Proposal.html#geographically-weighted-random-forest-1",
+    "title": "Project Proposal",
+    "section": "3.3 Geographically Weighted Random Forest",
+    "text": "3.3 Geographically Weighted Random Forest"
   }
 ]

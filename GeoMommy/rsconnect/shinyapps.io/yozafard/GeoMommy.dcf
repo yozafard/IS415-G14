@@ -1,0 +1,12 @@
+name: GeoMommy
+title:
+username: yozafard
+account: yozafard
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 11749444
+bundleId: 8489888
+url: https://yozafard.shinyapps.io/GeoMommy/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

@@ -2,6 +2,7 @@ pacman::p_load(shiny, shinycssloaders, car, olsrr, corrplot, ggpubr, sf, spdep, 
 library(leaflet)
 library(leaflet.extras)
 library(bslib)  
+# library(rsconnect)
 # UI
 source('kde/kde_ui.R', local = TRUE)
 source('gwr/gwr_ui.R', local = TRUE)
@@ -28,4 +29,3 @@ server <- function(input, output) {
 
 # Run the application 
 shinyApp(ui = ui, server = server)
-

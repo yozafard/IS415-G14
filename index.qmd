@@ -6,4 +6,11 @@ Welcome to GeoMommy Project page
 
 We are a group of 3, working on to make a room rental unit analysis in Jakarta. So, wait for more updates by visiting this page. Thank you!
 
+# Abstract
+
+This project investigates room rental price prediction in Jakarta using geospatial analysis methods to assist home owners, property agents, and potential business owners in the rental market. Through Geospatial Weighted Regression, both descriptive and predictive methods, and Kernel Density Estimation techniques, we explore the spatial dynamics and determinants of rental prices across Jakarta's diverse neighborhoods. By analyzing publicly available datasets and employing machine learning algorithms, we uncover spatial patterns, identify high-demand areas, and segment neighborhoods based on rental price similarities. The project culminates in the development of interactive visualizations that convey insights intuitively, facilitating informed decision making and strategic planning in Jakarta's evolving rental market.
+
+# Important Links
+
 -   [Project Proposal](./Deliverables/Proposal.qmd)
+-   [Project Poster](./Deliverables/Poster.qmd)

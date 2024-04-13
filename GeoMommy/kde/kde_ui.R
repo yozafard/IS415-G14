@@ -12,6 +12,11 @@ kde_ui <- fluidPage(
              sidebarLayout(
                sidebarPanel(
                  # Inputs specific to Kernel Density Estimation
+                 selectInput("kde_type",
+                             "Select KDE Type:",
+                             choices = c("Price Density" = "with_price",
+                                         "Room Density" = "without_price")
+                             ),
                  selectInput("city",
                              "Select City:",
                              choices = c("Select All" = "DKI Jakarta", 

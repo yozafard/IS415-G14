@@ -1,11 +1,10 @@
-pacman::p_load(sf, spdep, tmap, tidyverse, knitr, ggplot2, raster, spatstat, maptools, shiny, DT)
-
+pacman::p_load(sp, sf, spdep, tmap, tidyverse, knitr, ggplot2, raster, spatstat, shiny, DT, knitr)
 sf <- read_rds('./kde/data/mamikos_final.rds')
 sf <- sf |> st_transform(23834)
 jakarta <- read_rds('./kde/data/jakarta_sf.rds')
 jakarta <- jakarta |> st_transform(23834)
   
-  output$kdePlot <- renderPlot({
+output$kdePlot <- renderPlot({
     get_owin <- function(city_name) {
       if(city_name != "DKI Jakarta"){
         city <- jakarta[jakarta$WADMKK == city_name, ]
@@ -16,32 +15,32 @@ jakarta <- jakarta |> st_transform(23834)
       }
       return(owin)
     }
-    
-    get_ppp <- function(city_name) {
+
+    get_ppp <- function(city_name, kde_type) {
       coords <- st_coordinates(sf)
-      prices <- sf$price_monthly
-      ppp_with_price <- spatstat.geom::ppp(coords[,1], coords[,2], marks=prices, window=get_owin(city_name))
-      ppp_with_price <- rescale(ppp_with_price, 1000, "km")
-      return(ppp_with_price)
+      if(kde_type == "with_price") {
+        prices <- sf$price_monthly
+        ppp_with_price <- spatstat.geom::ppp(coords[,1], coords[,2], marks=prices, window=get_owin(city_name))
+        ppp_with_price <- rescale(ppp_with_price, 1000, "km")
+        return(ppp_with_price)
+      } else {
+        ppp_without_price <- spatstat.geom::ppp(coords[,1], coords[,2], window=get_owin(city_name))
+        ppp_without_price <- rescale(ppp_without_price, 1000, "km")
+        return(ppp_without_price)
+      }
     }
-    
-    get_kde <- function(city_name, bandwidth, kernel) {
-      kde_500 <- density(get_ppp(city_name), sigma = bandwidth, edge=TRUE, kernel=kernel)
+
+    get_kde <- function(city_name, kde_type, bandwidth, kernel) {
+      kde_500 <- density(get_ppp(city_name, kde_type), sigma = bandwidth, edge=TRUE, kernel=kernel)
       return(kde_500)
     }
     city_name <- input$city
-    kde_est <- get_kde(city_name, input$bandwidth, input$kernel)
-    # plot(kde_est, main=city_name)
-    kde_grid <- as.SpatialGridDataFrame.im(kde_est)
-    spplot(kde_grid, main=city_name)
-    # plot(kde, main=city_name)
-    # kde_raster <- raster(kde_grid)
-    # projection(kde_raster) <- CRS("+init=EPSG:3414")
-    # 
-    # tm_shape(kde_raster) + 
-    #   tm_raster("v") +
-    #   tm_layout(legend.position = c("right", "bottom"), frame = FALSE)
+    kde_type <- input$kde_type
+    kde_est <- get_kde(city_name, kde_type, input$bandwidth, input$kernel)
+    plot(kde_est, main=city_name)
   })
+  
+  
   
   output$varDistPlot <- renderPlot({
     # Retrieve the name of the variable to plot
