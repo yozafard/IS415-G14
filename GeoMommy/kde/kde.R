@@ -41,26 +41,63 @@ output$kdePlot <- renderPlot({
   })
   
   
+  # mamikos_no_geo <- sf |> st_drop_geometry()
+  output$variableSelect <- renderUI({
+    # Ensure 'sf' is the data frame with your data
+    # Filter out non-numeric columns if needed, or apply other filters
+
+    # Create a vector of column names to be used as choices
+    var_choices <- setNames(names(sf), names(sf))
+    
+    # If you want to transform some variables (like taking log), do it here
+    var_choices["log_price"] <- "log_price"
+    
+    selectInput("var",
+                "Select Variable:",
+                choices = var_choices,
+                selected = "price_monthly"
+    )
+  })
+
   
   output$varDistPlot <- renderPlot({
     # Retrieve the name of the variable to plot
     var_name <- input$var
-    if (input$var == "log_price") {
-      sf <- sf |>
-        mutate(log_price = log(price_monthly))
-    }
-    print(paste("Plotting variable:", var_name)) # For debugging
     
-    # Create the plot
-    ggplot(sf, aes_(x = as.name(var_name))) +
-      geom_histogram(bins = 30, fill = "#2caa4a", color = "black") +
-      labs(title = paste("Variable Distribution of", var_name),
-           x = var_name,
-           y = "Frequency")
+    # Use a local copy of 'sf' to avoid altering the original data frame
+    local_sf <- sf
+    
+    # Check if the variable needs transformation
+    if (var_name == "log_price") {
+      local_sf <- mutate(local_sf, log_price = log(price_monthly))
+      var_name <- "log_price"
+    }
+    
+    # Plot based on the variable type
+    if (!is.null(local_sf[[var_name]])) {  # Check if the column exists
+      if (is.numeric(local_sf[[var_name]])) {
+        # Numerical variable: create a histogram or density plot
+        ggplot(local_sf, aes_string(x = var_name)) +
+          geom_histogram(bins = 30, fill = "#2caa4a", color = "black") +
+          labs(title = paste("Distribution of", var_name),
+               x = var_name, 
+               y = "Frequency")
+      } else {
+        # Categorical variable: create a bar plot
+        ggplot(local_sf, aes_string(x = var_name, fill = var_name)) +
+          geom_bar() +
+          labs(title = paste("Distribution of", var_name),
+               x = var_name, 
+               y = "Count") +
+          theme(legend.position = "none")  # Hide legend for single-variable bar plots
+      }
+    } else {
+      stop("Selected variable does not exist in the dataset.")
+    }
   })
   
-  # mamikos_no_geo <- sf |> st_drop_geometry()
-    
+  
+  
   output$corrPlot <- renderPlot({
     mamikos_no_geo <- sf |> st_drop_geometry()
     corrplot(cor(mamikos_no_geo |> dplyr::select(-c("x_id", "price_monthly"))),

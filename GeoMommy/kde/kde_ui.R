@@ -49,16 +49,7 @@ kde_ui <- fluidPage(
     tabPanel("Variable Distribution",
              sidebarLayout(
                sidebarPanel(
-                 # Inputs specific to Variable Distribution
-                 # Define inputs here as done in the first tab
-                 selectInput("var",
-                             "Select Variable:",
-                             choices = c("Monthly Price" = "price_monthly",
-                                         "Monthly Price (log transformed)" = "log_price"
-                                         
-                                         ),
-                             selected = "price_monthly"
-                )
+                 uiOutput("variableSelect")  # Dynamic UI for selecting variable
                ),
                mainPanel(
                  # Output for the Variable Distribution plot
