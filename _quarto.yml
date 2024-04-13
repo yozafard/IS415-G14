@@ -7,6 +7,8 @@ website:
     left: 
       - text: "Project Proposal"
         href: "Deliverables/Proposal.html"
+      - text: "Project Poster"
+        href: "Deliverables/Poster.html"
     right:
       - icon: github
         href: https://github.com/yozafard/IS415-G14
