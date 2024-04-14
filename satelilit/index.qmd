@@ -1,9 +1,0 @@
----
-title: "satelilit"
----
-
-Welcome to satelilit Project page
-
-We are a group of 3, working on to make a real estate maestro in Metro Manila. So, wait for more updates by visiting this page. Thank you!
-
--   [Project Proposal](./Deliverables/Proposal.qmd)
