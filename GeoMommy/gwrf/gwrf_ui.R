@@ -27,7 +27,7 @@ gwrf_ui <- tabPanel(
                   max = 2024,
                   value = 2000),
 
-      actionButton(inputId = "predict", label = "Predict")
+      actionButton(inputId = "predict", label = "Predict", style="color: #fff; background-color: #2caa4a;")
     ),
     mainPanel(fluid = TRUE,
       tabsetPanel(
