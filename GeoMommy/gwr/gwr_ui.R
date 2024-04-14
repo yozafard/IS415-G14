@@ -60,7 +60,7 @@ gwr_ui <- tabPanel(
           value = "mlr",
           fluidRow(
             column(12, shinycssloaders::withSpinner(tmapOutput("MLRDPlot"), type = 8, color = "#2caa4a")),
-            column(12, shinycssloaders::withSpinner(dataTableOutput("MLRDCoef"), type = 8, color = "#2caa4a"))
+            column(12, shinycssloaders::withSpinner(DT::dataTableOutput("MLRDCoef"), type = 8, color = "#2caa4a"))
           ),
         ),
       )
