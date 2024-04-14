@@ -1,0 +1,138 @@
+---
+title: "Meeting Minutes"
+format: 
+  html:
+    code-fold: true
+    code-summary: "Show code"
+    toc-depth: 3
+author: "Alexander Vincent Lewi, Emily Aurelia, Yozafard Harold Siauheming"
+date: "12 April 2024"
+execute: 
+  message: false
+  warning: false
+  freeze: true
+---
+
+Considering the nature of the project, a lot of decisions need to be taken as a group. To keep track of those decisions, we are using these meeting minutes as a main point of reference for our decision making processes. However, outside of these meetings, we also have other methods of communication, such as our group chat, and email correspondences with Prof Kam
+
+# Team Meeting 1
+
+## Date: 26 Febuary 2024
+
+### Attendees: Vincent, Emily, Yoza
+
+### Points:
+
+-   Team formation
+
+-   Start of idea branstorming
+
+# Team Meeting 2
+
+## Date: 04 March 2024
+
+### Attendees: Vincent, Emily, Yoza
+
+### Points:
+
+-   Team formation
+
+-   Start of idea branstorming: decided on house price prediction in Manila
+
+-   Individual research and proposal writing
+
+# Team Meeting 3
+
+## Date: 11 March 2024
+
+### Attendees: Vincent, Emily, Yoza
+
+### Points:
+
+-   Decided to pivot over to Anytime Fitness franchising in Singapore
+
+-   Started on proposal writing
+
+# Consultation 1
+
+## Date: 13 March 2024
+
+### Attendees: Prof Kam, Vincent, Emily, Yoza
+
+### Points:
+
+-   Gained more insights on the challenges of our topic, for both Anytime Fitness and Manila house price prediction
+
+-   Gained suggestion to focus more on Jakarta market, considering our backgrounds
+
+# Team Meeting 4
+
+## Date: 16 March 2024
+
+### Attendees: Vincent, Emily, Yoza
+
+### Points:
+
+-   Researched more on housing in Jakarta
+
+-   Decided on using data from Mamikos
+
+# Team Meeting 5
+
+## Date: 22 March 2024
+
+### Attendees: Vincent, Emily, Yoza
+
+### Points:
+
+-   Finalized our topic: Room Rental Unit Analysis in Jakarta, using data from Mamikos
+
+-   Started on data collection and preprocessing
+
+# Team Meeting 6
+
+## Date: 25 March 2024
+
+### Attendees: Vincent, Emily, Yoza
+
+### Points:
+
+-   Started on our respective parts for the project
+
+-   Brainstormed poster ideas
+
+# Team Meeting 7
+
+## Date: 1 April 2024
+
+### Attendees: Vincent, Emily, Yoza
+
+### Points:
+
+-   Finished poster
+
+-   Started transferring over our parts to the Shiny App
+
+# Team Meeting 8
+
+## Date: 5 April 2024
+
+### Attendees: Vincent, Emily, Yoza
+
+### Points:
+
+-   Finished Shiny App
+
+-   Preparation for presentation
+
+# Team Meeting 9
+
+## Date: 12 April 2024
+
+### Attendees: Vincent, Emily, Yoza
+
+### Points:
+
+-   Made necessary adjustments based on feedbacks from our presentation
+
+-   Finishing touches before submission

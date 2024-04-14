@@ -95,7 +95,7 @@
     "href": "index.html",
     "title": "GeoMommy",
     "section": "",
-    "text": "Welcome to GeoMommy Project page\nWe are a group of 3, working on to make a room rental unit analysis in Jakarta. So, wait for more updates by visiting this page. Thank you!\n\nAbstract\nThis project investigates room rental price prediction in Jakarta using geospatial analysis methods to assist home owners, property agents, and potential business owners in the rental market. Through Geospatial Weighted Regression, both descriptive and predictive methods, and Kernel Density Estimation techniques, we explore the spatial dynamics and determinants of rental prices across Jakarta’s diverse neighborhoods. By analyzing publicly available datasets and employing machine learning algorithms, we uncover spatial patterns, identify high-demand areas, and segment neighborhoods based on rental price similarities. The project culminates in the development of interactive visualizations that convey insights intuitively, facilitating informed decision making and strategic planning in Jakarta’s evolving rental market.\n\n\nImportant Links\n\nProject Proposal\nProject Poster"
+    "text": "Welcome to GeoMommy Project page\nWe are a group of 3, working on to make a room rental unit analysis in Jakarta. So, wait for more updates by visiting this page. Thank you!\n\nAbstract\nThis project investigates room rental price prediction in Jakarta using geospatial analysis methods to assist home owners, property agents, and potential business owners in the rental market. Through Geospatial Weighted Regression, both descriptive and predictive methods, and Kernel Density Estimation techniques, we explore the spatial dynamics and determinants of rental prices across Jakarta’s diverse neighborhoods. By analyzing publicly available datasets and employing machine learning algorithms, we uncover spatial patterns, identify high-demand areas, and segment neighborhoods based on rental price similarities. The project culminates in the development of interactive visualizations that convey insights intuitively, facilitating informed decision making and strategic planning in Jakarta’s evolving rental market.\n\n\nImportant Links\n\nProject Proposal\nProject Poster\nShiny App"
   },
   {
     "objectID": "satelilit/index.html",
@@ -474,5 +474,82 @@
     "title": "Project Proposal",
     "section": "5.3 Predictive Analysis",
     "text": "5.3 Predictive Analysis\n\nPredicts the price of the rental units based on the user input according to the chosen model (GWRF or MLR)\nDisplays the performance of each model in terms of the predictions of the rental unit prices"
+  },
+  {
+    "objectID": "Deliverables/Meeting_Minutes.html",
+    "href": "Deliverables/Meeting_Minutes.html",
+    "title": "Meeting Minutes",
+    "section": "",
+    "text": "Considering the nature of the project, a lot of decisions need to be taken as a group. To keep track of those decisions, we are using these meeting minutes as a main point of reference for our decision making processes. However, outside of these meetings, we also have other methods of communication, such as our group chat, and email correspondences with Prof Kam"
+  },
+  {
+    "objectID": "Deliverables/Meeting_Minutes.html#date-26-febuary-2024",
+    "href": "Deliverables/Meeting_Minutes.html#date-26-febuary-2024",
+    "title": "Meeting Minutes",
+    "section": "Date: 26 Febuary 2024",
+    "text": "Date: 26 Febuary 2024\n\nAttendees: Vincent, Emily, Yoza\n\n\nPoints:\n\nTeam formation\nStart of idea branstorming"
+  },
+  {
+    "objectID": "Deliverables/Meeting_Minutes.html#date-04-march-2024",
+    "href": "Deliverables/Meeting_Minutes.html#date-04-march-2024",
+    "title": "Meeting Minutes",
+    "section": "Date: 04 March 2024",
+    "text": "Date: 04 March 2024\n\nAttendees: Vincent, Emily, Yoza\n\n\nPoints:\n\nTeam formation\nStart of idea branstorming: decided on house price prediction in Manila\nIndividual research and proposal writing"
+  },
+  {
+    "objectID": "Deliverables/Meeting_Minutes.html#date-11-march-2024",
+    "href": "Deliverables/Meeting_Minutes.html#date-11-march-2024",
+    "title": "Meeting Minutes",
+    "section": "Date: 11 March 2024",
+    "text": "Date: 11 March 2024\n\nAttendees: Vincent, Emily, Yoza\n\n\nPoints:\n\nDecided to pivot over to Anytime Fitness franchising in Singapore\nStarted on proposal writing"
+  },
+  {
+    "objectID": "Deliverables/Meeting_Minutes.html#date-13-march-2024",
+    "href": "Deliverables/Meeting_Minutes.html#date-13-march-2024",
+    "title": "Meeting Minutes",
+    "section": "Date: 13 March 2024",
+    "text": "Date: 13 March 2024\n\nAttendees: Prof Kam, Vincent, Emily, Yoza\n\n\nPoints:\n\nGained more insights on the challenges of our topic, for both Anytime Fitness and Manila house price prediction\nGained suggestion to focus more on Jakarta market, considering our backgrounds"
+  },
+  {
+    "objectID": "Deliverables/Meeting_Minutes.html#date-16-march-2024",
+    "href": "Deliverables/Meeting_Minutes.html#date-16-march-2024",
+    "title": "Meeting Minutes",
+    "section": "Date: 16 March 2024",
+    "text": "Date: 16 March 2024\n\nAttendees: Vincent, Emily, Yoza\n\n\nPoints:\n\nResearched more on housing in Jakarta\nDecided on using data from Mamikos"
+  },
+  {
+    "objectID": "Deliverables/Meeting_Minutes.html#date-22-march-2024",
+    "href": "Deliverables/Meeting_Minutes.html#date-22-march-2024",
+    "title": "Meeting Minutes",
+    "section": "Date: 22 March 2024",
+    "text": "Date: 22 March 2024\n\nAttendees: Vincent, Emily, Yoza\n\n\nPoints:\n\nFinalized our topic: Room Rental Unit Analysis in Jakarta, using data from Mamikos\nStarted on data collection and preprocessing"
+  },
+  {
+    "objectID": "Deliverables/Meeting_Minutes.html#date-25-march-2024",
+    "href": "Deliverables/Meeting_Minutes.html#date-25-march-2024",
+    "title": "Meeting Minutes",
+    "section": "Date: 25 March 2024",
+    "text": "Date: 25 March 2024\n\nAttendees: Vincent, Emily, Yoza\n\n\nPoints:\n\nStarted on our respective parts for the project\nBrainstormed poster ideas"
+  },
+  {
+    "objectID": "Deliverables/Meeting_Minutes.html#date-1-april-2024",
+    "href": "Deliverables/Meeting_Minutes.html#date-1-april-2024",
+    "title": "Meeting Minutes",
+    "section": "Date: 1 April 2024",
+    "text": "Date: 1 April 2024\n\nAttendees: Vincent, Emily, Yoza\n\n\nPoints:\n\nFinished poster\nStarted transferring over our parts to the Shiny App"
+  },
+  {
+    "objectID": "Deliverables/Meeting_Minutes.html#date-5-april-2024",
+    "href": "Deliverables/Meeting_Minutes.html#date-5-april-2024",
+    "title": "Meeting Minutes",
+    "section": "Date: 5 April 2024",
+    "text": "Date: 5 April 2024\n\nAttendees: Vincent, Emily, Yoza\n\n\nPoints:\n\nFinished Shiny App\nPreparation for presentation"
+  },
+  {
+    "objectID": "Deliverables/Meeting_Minutes.html#date-12-april-2024",
+    "href": "Deliverables/Meeting_Minutes.html#date-12-april-2024",
+    "title": "Meeting Minutes",
+    "section": "Date: 12 April 2024",
+    "text": "Date: 12 April 2024\n\nAttendees: Vincent, Emily, Yoza\n\n\nPoints:\n\nMade necessary adjustments based on feedbacks from our presentation\nFinishing touches before submission"
   }
 ]

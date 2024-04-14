@@ -14,3 +14,4 @@ This project investigates room rental price prediction in Jakarta using geospati
 
 -   [Project Proposal](./Deliverables/Proposal.qmd)
 -   [Project Poster](./Deliverables/Poster.qmd)
+-   [Shiny App](https://yozafard.shinyapps.io/GeoMommy/)
