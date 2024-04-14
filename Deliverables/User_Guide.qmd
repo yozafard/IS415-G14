@@ -27,8 +27,7 @@ The KDE Plot here will show the distribution of rental units, with price as addi
 
 You can choose which city you want to view through this drop down button. "Select All" means you will be viewing the entire Jakarta.
 
-![](images/kde_city_button.jpg)
-This slider will be used to select the bandwidth. The default value is 0.5 kilometres.
+![](images/kde_city_button.jpg) This slider will be used to select the bandwidth. The default value is 0.5 kilometres.
 
 ![](images/kde_bw_slider.jpg)
 
@@ -40,8 +39,7 @@ And the last dropdown button will be used to select the kernel method
 
 This tab will show the distribution of different variables in our dataset
 
-![](images/eda_var_dist.jpg)
-To change which variable you want to see, you can use the dropdown on the left
+![](images/eda_var_dist.jpg) To change which variable you want to see, you can use the dropdown on the left
 
 ![](images/var_dist_dropdown.jpg)
 
@@ -51,12 +49,32 @@ The Correlation Plot will show which variables are highly correlated with each o
 
 ![](images/eda_corrplot.jpg)
 
-
 ## Data Table
 
 In this tab, you can use the Data Table to view the entire dataset
 
-![](images/eda_dt.jpg)
-Use this dropdown to change how many rows to display in one page
+![](images/eda_dt.jpg) Use this dropdown to change how many rows to display in one page
 
 ![](images/dt_dropdown.jpg)
+
+# Predictive Analysis
+
+For the Predictive Analysis section, there are two subsection, the Predicting Price section and the Model Performance section.
+
+## Predicting Price
+![](images/predictive_screenshot.jpg)
+Users can see the prediction of the monthly rental price of a room in Jakarta. The prediction is based on the input of the user, which includes the type of predictive model that the user wants to use, the address of the rental unit, the gender allowed to stay in the room, the size of the room, and the building year. 
+
+![](images/predictive_model.png)
+The user can choose between two predictive models, namely Geographically Weighted Random Forest (GWRF) and Multiple Linear Regression (MLR). 
+
+![](images/predictive_address.png)
+The address must be within DKI Jakarta and searchable in OpenStreetMap (OSM) as our data is only within Jakarta and we use the OSM API to geocode. Once the user has inputted all the data, the user can click the "Predict" button to see the predicted price of the rental unit. 
+
+![](images/predictive_result.png)
+The location of the rental unit will also be shown in the map and the predicted price will be shown below the map. 
+
+## Model Performance
+![](images/predictive_performance.png)
+This page will show the selected model performance. The graph that is shown in based on our test dataset. We did an 80-20 train-test split for the MLR model and a 60-40 train-test split for the GWRF. This difference in the split for each model is because of the time taken for the models to train. The user can also see the Mean Absolute Percentage Error (MAPE) of the model below the graph.
+

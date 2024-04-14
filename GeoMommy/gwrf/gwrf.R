@@ -1,7 +1,7 @@
 library(ggplot2, sf, tidyverse)
 
 gwRF <- readRDS("gwrf/data/model/GWRF_model_10%_100trees.rds")
-grf_pred <- readRDS("gwrf/data/GRF_pred.rds")
+# grf_pred <- readRDS("gwrf/data/GRF_pred.rds")
 test_data <- readRDS("gwrf/data/test2.rds")
 
 airport <- readRDS("gwrf/data/airport.rds")
@@ -121,7 +121,7 @@ output$GWRFText <- renderText({
   if (is.null(input$searchBar) || input$searchBar == "" || is.null(addr_input()$addr)){
     paste("Predicted Price: Please input the rental unit data")
   } else {
-    paste("Predicted Price: Rp.", result())
+    paste("Predicted Price: Rp.", round(result(),2))
   }
 })
 
@@ -166,40 +166,5 @@ output$GWRFMap <- renderLeaflet({
 }
 )
 
-output$GWRFText <- renderText({
-  if (is.null(input$searchBar) || input$searchBar == "" || is.null(addr_input$lat)){
-    paste("Predicted Price: Please input the rental unit data")
-  } else {
-    paste("Predicted Price:", result())
-  }
-  
-})
 
-
-# addr_input <- data.frame(addr = input$searchBar)
-# coord <- geocode(addr_input, address = addr, method = "osm")
-# 
-# # Server logic for Feature 
-# output$GWRFPlot <- renderPlot({
-#   ggplot(data = test_data,
-#          aes(x = GRF_pred,
-#              y = price_monthly)) +
-#     geom_point()
-# 
-# 
-# })
-# 
-# searchResults <- reactive({
-#   # Assuming 'locations' is a data frame with your locations and their coordinates
-#   searchedLocations <- coord[grepl(pattern = input$searchBar, x = coord$addr, ignore.case = TRUE), ]
-#   return(searchedLocations)
-# })
-# 
-# # Update the map based on search results
-# observe({
-#   # Using leafletProxy to update the map reactively
-#   leafletProxy("GWRFMap", data = searchResults()) %>%
-#     clearMarkers() %>%  # Clear existing markers
-#     addMarkers(~long, ~lat)  # Add new markers based on search results
-# })
 
