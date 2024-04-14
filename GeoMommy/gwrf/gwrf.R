@@ -1,15 +1,15 @@
 library(ggplot2, sf, tidyverse)
 
-gwRF <- readRDS("gwrf/data/model/gwRF_adaptive.rds")
+gwRF <- readRDS("gwrf/data/model/GWRF_model_10%_100trees.rds")
 grf_pred <- readRDS("gwrf/data/GRF_pred.rds")
-test_data <- readRDS("gwrf/data/test_data_p.rds")
+test_data <- readRDS("gwrf/data/test2.rds")
 
 airport <- readRDS("gwrf/data/airport.rds")
 gereja <- readRDS("gwrf/data/gereja.rds")
 kantorpos <- readRDS("gwrf/data/kantorpos.rds")
 kesehatan <- readRDS("gwrf/data/kesehatan.rds")
 masjid <- readRDS("gwrf/data/masjid.rds")
-other_saranaibadah <- readRDS("gwrf/data/other_saranaibadah.rds")
+# other_saranaibadah <- readRDS("gwrf/data/other_saranaibadah.rds")
 pendidikan <- readRDS("gwrf/data/pendidikan.rds")
 pura <- readRDS("gwrf/data/pura.rds")
 stasiunka <- readRDS("gwrf/data/stasiunka.rds")
@@ -23,7 +23,11 @@ mlr_test <- readRDS("gwrf/data/mlr_test.rds")
 
 observeEvent(input$predict, {
 addr_input <- reactive({
-  data.frame(addr = input$searchBar)
+  if (is.null(input$searchBar) || input$searchBar == ""){
+    return(data.frame(addr = "Jakarta"))
+  } else {
+    return(data.frame(addr = input$searchBar))
+  }
 })
 
 coord <- reactive({
@@ -89,7 +93,7 @@ if (input$model == "Geographically Weighted Random Forest") {
                            local.w=1,
                            global.w=0) |> as.data.frame()
   
-  return(gwRF_pred$GRF_pred)
+  return(gwRF_pred)
 } else {
   input_data <- input_data |> dplyr::select(-c("X", "Y"))
   return(predict(mlr, input_data))
@@ -117,7 +121,7 @@ output$GWRFText <- renderText({
   if (is.null(input$searchBar) || input$searchBar == "" || is.null(addr_input()$addr)){
     paste("Predicted Price: Please input the rental unit data")
   } else {
-    paste("Predicted Price: Rp.", round(result(), 2))
+    paste("Predicted Price: Rp.", result())
   }
 })
 
@@ -128,7 +132,7 @@ output$ModelText <- renderText({
   paste("Predicted Price:")
   
   if (input$model == "Geographically Weighted Random Forest") {
-    paste(input$model, "MAPE:", MAPE(test_data$price_monthly, test_data$GRF_pred))
+    paste(input$model, "MAPE:", MAPE(test_data$price_monthly, test_data$gwRF_pred))
   } else {
     paste(input$model, "MAPE:", MAPE(mlr_test$price_monthly, mlr_test$mlr_pred))
   }
@@ -139,7 +143,7 @@ output$ModelText <- renderText({
 output$GWRFPlot <- renderPlot({
   if (input$model == "Geographically Weighted Random Forest") {
     ggplot(data = test_data,
-           aes(x = grf_pred,
+           aes(x = gwRF_pred,
                y = price_monthly)) +
       geom_point()
   } else {
