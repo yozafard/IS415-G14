@@ -11,6 +11,8 @@ website:
         href: "Deliverables/Poster.html"
       - text: "User Guide"
         href: "Deliverables/User_Guide.html"
+      - text: "Meeting Minutes"
+        href: "Deliverables/Meeting_Minutes.html"
       - text: "Shiny App"
         href: "https://yozafard.shinyapps.io/GeoMommy/"
         target: "_blank"

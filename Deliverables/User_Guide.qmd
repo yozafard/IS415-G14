@@ -55,7 +55,7 @@ The Correlation Plot will show which variables are highly correlated with each o
 
 In this tab, you can use the Data Table to view the entire dataset
 
-![](images/eda_dt.jpg) 
+![](images/eda_dt.jpg)
 
 Use this dropdown to change how many rows to display in one page
 
@@ -77,7 +77,7 @@ You can choose which variable you want to see the coefficient of using the dropd
 
 You can choose which variable you want to plot using the dropdown on the left side. There are many other drowdowns as well that you can use to customize the configuration of the GWR model, and see how different configuration affect the coefficient of the chosen variable.
 
-##  Multiple Linear Regression
+## Multiple Linear Regression
 
 ![](images/mlr.png)
 
@@ -103,10 +103,8 @@ The user can choose between two predictive models, namely Geographically Weighte
 
 The address must be within DKI Jakarta and searchable in OpenStreetMap (OSM) as our data is only within Jakarta and we use the OSM API to geocode. Once the user has inputted all the data, the user can click the "Predict" button to see the predicted price of the rental unit.
 
-![](images/predictive_result.png) 
-The location of the rental unit will also be shown in the map and the predicted price will be shown below the map.
+![](images/predictive_result.png) The location of the rental unit will also be shown in the map and the predicted price will be shown below the map.
 
 ## Model Performance
 
-![](images/predictive_performance.png) 
-This page will show the selected model performance. The graph that is shown in based on our test dataset. We did an 80-20 train-test split for the MLR model and a 60-40 train-test split for the GWRF. This difference in the split for each model is because of the time taken for the models to train. The user can also see the Mean Absolute Percentage Error (MAPE) of the model below the graph.
+![](images/predictive_performance.png) This page will show the selected model performance. The graph that is shown in based on our test dataset. We did an 80-20 train-test split for the MLR model and a 60-40 train-test split for the GWRF. This difference in the split for each model is because of the time taken for the models to train. The user can also see the Mean Absolute Percentage Error (MAPE) of the model below the graph.
