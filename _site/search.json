@@ -362,5 +362,68 @@
     "title": "Project Proposal",
     "section": "3.3 Geographically Weighted Random Forest",
     "text": "3.3 Geographically Weighted Random Forest"
+  },
+  {
+    "objectID": "deliverables/User_Guide.html",
+    "href": "deliverables/User_Guide.html",
+    "title": "User Guide",
+    "section": "",
+    "text": "Welcome to the user guide! Here, we will be showing you how to use our Shiny App"
+  },
+  {
+    "objectID": "deliverables/User_Guide.html#kernel-density-estimation",
+    "href": "deliverables/User_Guide.html#kernel-density-estimation",
+    "title": "User Guide",
+    "section": "Kernel Density Estimation",
+    "text": "Kernel Density Estimation\n\nThe KDE Plot here will show the distribution of rental units, with price as additional weight, meaning that rental units with higher prices will have an additional weight on the plot.\nYou can choose which city you want to view through this drop down button. “Select All” means you will be viewing the entire Jakarta.\n\nThis slider will be used to select the bandwidth. The default value is 0.5 kilometres.\n\nAnd the last dropdown button will be used to select the kernel method"
+  },
+  {
+    "objectID": "deliverables/User_Guide.html#variable-distribution",
+    "href": "deliverables/User_Guide.html#variable-distribution",
+    "title": "User Guide",
+    "section": "Variable Distribution",
+    "text": "Variable Distribution\nThis tab will show the distribution of different variables in our dataset\n To change which variable you want to see, you can use the dropdown on the left"
+  },
+  {
+    "objectID": "deliverables/User_Guide.html#correlation-plot",
+    "href": "deliverables/User_Guide.html#correlation-plot",
+    "title": "User Guide",
+    "section": "Correlation Plot",
+    "text": "Correlation Plot\nThe Correlation Plot will show which variables are highly correlated with each other."
+  },
+  {
+    "objectID": "deliverables/User_Guide.html#data-table",
+    "href": "deliverables/User_Guide.html#data-table",
+    "title": "User Guide",
+    "section": "Data Table",
+    "text": "Data Table\nIn this tab, you can use the Data Table to view the entire dataset\n\nUse this dropdown to change how many rows to display in one page"
+  },
+  {
+    "objectID": "deliverables/User_Guide.html#geographically-weighted-regression",
+    "href": "deliverables/User_Guide.html#geographically-weighted-regression",
+    "title": "User Guide",
+    "section": "Geographically Weighted Regression",
+    "text": "Geographically Weighted Regression\n\nIn this tab, you can see the average values of the coefficient of chosen variables per desa (villages) in Jakarta.\n\nYou can choose which variable you want to see the coefficient of using the dropdown on the left\nYou can choose which variable you want to plot using the dropdown on the left side. There are many other drowdowns as well that you can use to customize the configuration of the GWR model, and see how different configuration affect the coefficient of the chosen variable."
+  },
+  {
+    "objectID": "deliverables/User_Guide.html#multiple-linear-regression",
+    "href": "deliverables/User_Guide.html#multiple-linear-regression",
+    "title": "User Guide",
+    "section": "Multiple Linear Regression",
+    "text": "Multiple Linear Regression\n\nIn this tab, you can see the summary of the multiple linear regression model. The plot will show you the average value of the coefficient of the chosen variable.\n\nSimilar to the GWR tab, you can choose which variable you want to see the coefficient of using the dropdown on the left. However, since MLR is a global model, you can’t see the coefficient of the variable per desa. You can choose to see the average fitted values, actual values, and the residuals per desa."
+  },
+  {
+    "objectID": "deliverables/User_Guide.html#predicting-price",
+    "href": "deliverables/User_Guide.html#predicting-price",
+    "title": "User Guide",
+    "section": "Predicting Price",
+    "text": "Predicting Price\n Users can see the prediction of the monthly rental price of a room in Jakarta. The prediction is based on the input of the user, which includes the type of predictive model that the user wants to use, the address of the rental unit, the gender allowed to stay in the room, the size of the room, and the building year.\n\nThe user can choose between two predictive models, namely Geographically Weighted Random Forest (GWRF) and Multiple Linear Regression (MLR).\n\nThe address must be within DKI Jakarta and searchable in OpenStreetMap (OSM) as our data is only within Jakarta and we use the OSM API to geocode. Once the user has inputted all the data, the user can click the “Predict” button to see the predicted price of the rental unit.\n The location of the rental unit will also be shown in the map and the predicted price will be shown below the map."
+  },
+  {
+    "objectID": "deliverables/User_Guide.html#model-performance",
+    "href": "deliverables/User_Guide.html#model-performance",
+    "title": "User Guide",
+    "section": "Model Performance",
+    "text": "Model Performance\n This page will show the selected model performance. The graph that is shown in based on our test dataset. We did an 80-20 train-test split for the MLR model and a 60-40 train-test split for the GWRF. This difference in the split for each model is because of the time taken for the models to train. The user can also see the Mean Absolute Percentage Error (MAPE) of the model below the graph."
   }
 ]

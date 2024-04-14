@@ -1,1 +1,8 @@
 /* css styles */
+.navbar {
+  background-color: #2caa4a;
+}
+
+.navbar span, path, i {
+  color: #fff;
+} 

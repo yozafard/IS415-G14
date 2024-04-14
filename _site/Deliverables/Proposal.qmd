@@ -15,27 +15,25 @@ execute:
 
 # 1. Abstract
 
-The escalating demand for accurate and geographically nuanced house pricing in Metro Manila necessitates innovative methods for analyzing real estate data. This project proposes an advanced analytical platform that integrates Interactive Maps, Geographically Weighted Regression Analysis Dashboards, and Cluster Analysis to provide detailed insights into house prices across Metro Manila. By leveraging real estate data scraped from Lamudi and geospatial data of the Philippines, the project aims to shed light on the spatial dynamics and factors influencing house prices.
-
-Through methodologies such as Geographically Weighted Regression (GWR) and Kernel Density Estimation, the platform will offer both visual and quantitative analyses to cater to different stakeholders, including potential homebuyers, real estate agents, and policymakers. This project is designed to overcome the limitations of traditional appraisal methods by offering a more localized and dynamic analysis of the real estate market.
+This project investigates room rental price prediction in Jakarta using geospatial analysis methods to assist home owners, property agents, and potential business owners in the rental market. Through Geospatial Weighted Regression, both descriptive and predictive methods, and Kernel Density Estimation techniques, we explore the spatial dynamics and determinants of rental prices across Jakarta's diverse neighborhoods. By analyzing publicly available datasets and employing machine learning algorithms, we uncover spatial patterns, identify high-demand areas, and segment neighborhoods based on rental price similarities. The project culminates in the development of interactive visualizations that convey insights intuitively, facilitating informed decision making and strategic planning in Jakarta's evolving rental market.
 
 # 2. Problem & Motivation
 
-The Philippines is currently one of Asia’s fastest growing economies with an aggressive and competitive real estate industry. Despite the pandemic, nationwide residential property prices grew by 27% in Q2 2020 (highest growth rate since Q1 2016). The real estate market in Metro Manila is characterized by its dynamism, complexity, and significant spatial heterogeneity, which makes the task of accurately assessing house prices a challenging endeavor. Traditional methods of real estate appraisal, such as Ordinary Least Squares Regression, often fail to account for spatial autocorrelation and heterogeneity, leading to inaccurate price estimations. Furthermore, potential homebuyers and other stakeholders lack access to user-friendly platforms that can provide a detailed spatial analysis of house prices. This gap hinders informed decision-making and contributes to the opacity of the real estate market.
+Jakarta's rapid urbanization and diverse demographic landscape present a complex challenge in understanding room rental prices. Traditional statistical methods overlook the spatial intricacies and demographic nuances that shape Jakarta's rental market dynamics. Factors like proximity to transportation, amenities, and schools contribute to the complexity. To address this, we aim to employ Geographically Weighted Regression (GWR) models to predict rental prices across Jakarta's neighborhoods. By capturing spatial variations in local amenities, GWR models offer tailored insights for stakeholders, enabling informed decisions amidst Jakarta's evolving urban landscape.
 
 # 3. Project Objectives
 
-In light of the complexities and the lack of accurate, accessible tools for analyzing house prices in Metro Manila, there is a pressing need for a more refined approach that takes into account geographical nuances and offers real-time data visualization. The project is motivated by the opportunity to leverage recent advancements in spatial analysis and data visualization technologies to address these challenges. By creating an interactive, geographically informed platform, the project aims to democratize access to real estate data, enabling potential buyers, investors, and policymakers to make more informed decisions. Additionally, the project seeks to contribute to the academic and practical understanding of real estate valuation, offering insights that could refine existing models and improve the accuracy of future real estate market analyses.
+In light of the complexities and the lack of accurate, accessible tools for analyzing rental prices in Jakarta, there is a pressing need for a more refined approach that takes into account geographical nuances and offers real-time data visualization. The project is motivated by the opportunity to leverage recent advancements in spatial analysis and data visualization technologies to address these challenges. By creating an interactive, geographically informed platform, the project aims to democratize access to real estate data, enabling potential buyers, investors, and policymakers to make more informed decisions. Additionally, the project seeks to contribute to the academic and practical understanding of real estate valuation, offering insights that could refine existing models and improve the accuracy of future real estate market analyses.
 
 # 4. Data Source
 
--   Real Estate Price Data
+-   Rental Listing Data
 
-Real estate price data scraped from [Lamudi Phillipines](http://lamudi.com.ph/), a popular real estate listing marketplace in the Philippines. This dataset contains the listing price of a house along with their respective features like number of bedrooms, number of bathrooms, amenities, etc.
+Rental unit data scraped from [Mamikos](https://mamikos.com/), a popular leading property rental platform and management company in Indonesia. This dataset contains the listing price of rental units along with their respective features like size of the rooms, price, etc.
 
--   Geospatial data of the Philippines
+-   Geospatial data of Jakarta
 
-A shapefile contains the borders of administrative regions level 1-4 of The Phillipines obtained from [Humdata](https://data.humdata.org/dataset/cod-ab-phl).
+A shapefile contains the borders of administrative regions of Jakarta, along with the coordinates of amenities that are in the region. This data is taken from [Indonesia Geospasial](https://www.indonesia-geospasial.com/2020/01/shp-rbi-provinsi-dki-jakarta-perwilayah.html).
 
 # 5. Approach & Methodology
 
@@ -43,15 +41,15 @@ A shapefile contains the borders of administrative regions level 1-4 of The Phil
 
 ### 1. Data Sourcing
 
-Our dataset will be sourced from Lamudi, a real-estate listing website in the Phillipines
+Our dataset will be sourced from Mamikos, a property rental platform in Indonesia. We will be focusing only on Jakarta's rental units, as it is the capital city and the most populous city in Indonesia. The dataset will include rental prices, room sizes, and other relevant features that influence rental prices. The data is scraped using Selenium and BeautifulSoup libraries in Python.
 
 ### 2. Data Importing
 
-The data importing will leverage on R libraries, such as dplyr for aspatial data, and sf for geospatial data
+The data importing will leverage on R libraries, such as dplyr for aspatial data, and sf for geospatial data. The data will be imported into R for further analysis and visualization.
 
 ### 3. Data Wrangling
 
-The imported data undergoes cleaning and preprocessing to address missing values, outliers, and inconsistencies. This stage may involve normalization, encoding categorical variables, and data transformation to ensure compatibility with analysis methods.
+The imported data undergoes cleaning and preprocessing to address missing values, outliers, and inconsistencies. This stage may involve normalization, encoding categorical variables, and data transformation to ensure compatibility with analysis methods. The data will be transformed into a spatial data frame using the sf library.
 
 ## 5.2 Exploratory Data Analysis
 
@@ -59,71 +57,63 @@ The imported data undergoes cleaning and preprocessing to address missing values
 
 Key distributions and relationships within the data are visualized using histograms and box plots. Histograms reveal the distribution of rental prices and other numerical variables, while box plots identify outliers and the spread of data across categorical variables.
 
-### 2. Choropleth
+### 2. Point Pattern Analysis - Kernel Density Estimation
 
-These maps provide a visual representation of rental price variations across different geographical areas, highlighting regions with higher or lower average rental prices.
+KDE plots help identify the density of rental properties across the city, offering insights into high-demand areas and potential patterns of spatial clustering. Price will also be used as a weight in the calculation, to offer more insight on high price rentals
 
-### 3. Kernel Density Estimation
+## 5.3 Descriptive Analytics
 
-KDE plots help identify the density of rental properties across the city, offering insights into high-demand areas and potential patterns of spatial clustering.
+### 1. Multiple Linear Regression (MLR)
 
-## 5.3 Hedonic Pricing Model - Ordinary Least Squares Regression
+Multiple Linear Regression is used to provide a global overview of how each feature affects the price of rental units in Jakarta. This model will be used to identify the most important features that affect the price of rental units in Jakarta.
 
-This foundational model assesses the impact of various property and location-specific factors on rental prices. OLS regression facilitates the estimation of coefficients for each determinant, providing a baseline for comparison with more complex models.
+### 2. Geographically Weighted Regression (GWR)
 
-Results from the OLS model are evaluated to determine the significance and impact of each variable. This involves examining R-squared values, p-values, and coefficient sizes to assess model fit and variable importance.
+Using Geographically Weighted Regression, we are aiming to give users an insight of how each feature affects the price of rental units in each region of Jakarta. This model will be used to identify the most important features that affect the price of rental units in each region of Jakarta.
 
-## 5.4 Geographically Weighted Regression
+## 5.4 Predictive Analytics
 
-Building on the OLS model, GWR introduces spatial variation in coefficients, allowing for the examination of how the impact of determinants on rental prices varies across different locations.
+### 1. Multiple Linear Regression
 
-The results of GWR are compared to the OLS model to understand the benefits of incorporating spatial data. This comparison highlights the spatial non-stationarity of relationships between rental prices and their determinants.
+We are using a standard Multiple Linear Regression to predict the price of a rental unit, based on user inputs. The user inputs would be location (taken from the address that the user inputted), the gender of the room (if it's a mixed unit, male-only, or female-only), size of the unit in meter square, and the year that the building is built or last renovated.
 
-## 5.5 Geographically and Temporally Weighted Regression
+### 2. Geographically Weighted Random Forest
 
-GTWR extends the analysis by incorporating temporal factors, such as the year or season of listing, alongside spatial data. This model captures how the influence of determinants on rental prices changes not only across space but also over time.
+Building on the Multiple Linear Regression, we wanted to improve it further by introducing location as a geospatial feature to add more weight for closer units.
 
-The introduction of temporal data in GTWR is evaluated by comparing its results with those of GWR and OLS models. This comparison sheds light on the temporal dynamics affecting rental prices and the added value of considering both spatial and temporal variations in the analysis.
+## 3.3 Geographically Weighted Random Forest
 
-# 6. Literature Review
+# 4. Literature Review
 
-##  6.1 [Mass Appraisal Modeling of Real Estate in Urban Centers by Geographically and Temporally Weighted Regression: A Case Study of Beijing’s Core Area](https://www.mdpi.com/2073-445X/9/5/143)
+## 4.1 [A Spatial Regression Model for Predicting Prices of Short-Term Rentals in Athens, Greece](https://www.mdpi.com/2220-9964/13/3/63)
 
 ### Objective
 
-To build a more effective and accurate model that can satisfy the standard of mass appraisal with large data volumes, complex housing characteristics and high accuracy requirements by utilising the spatio-temporal characteristics of the properties
+Explores the factors affecting the prices of short-term rental properties listed on Airbnb in Athens, Greece. Using spatial data analysis, the study focuses on identifying significant predictors of rental prices, including property features, host attributes, review characteristics, and various location attributes
 
 ### Methodology
 
-1.  Kernel Density Estimation
-
-To get a better understanding of the distribution of the property prices
-
-2.  Multiple Regression Analysis (Ordinary Least Squares)
+1.  Multiple Regression Analysis (Ordinary Least Squares)
 
 Explains the regression of a dependent variable over more than one independent variable
 
-3.  Geographically Weighted Regression
+2.  Geographically Weighted Regression
 
 A linear regression model which pays more attention to the local regression based on spatial relationship
-
-4.  Geographically and Temporally Weighted Regression
-
-Introducing the time variable to the regression model
 
 ### Learning points
 
 ![](images/litrev1.png)
 
-MRA with OLS can explain about 56% of the information, which is better than GWR with only 22%. However, adding the time variable improved the prediction to 82%
+Consistent across studies is the finding that location significantly influences short-term rental prices. Proximity to tourist attractions, amenities, and transport links are pivotal in determining price points.
+
+The characteristics of the property, such as the number of bedrooms and bathrooms, along with host-related factors like reviews and superhost status, play a crucial role in pricing
 
 ### Areas for improvement
 
-Using data for the entire city, not only in Beijing’s core area.
+Concentrate on the rentals with high residuals and analyze the neighborhood characteristics and the amenities they offer. In addition, replacing Euclidean distances with distances along the road network might improve the results of the OLS model
 
-Using rental data that has higher frequency compared to transaction data. This can better describe the housing value from the perspective of residence and usage rather than investment.
-
-## 6.2 [Assessing the Impact of Selected Attributes on Dwelling Prices Using Ordinary Least Squares Regression and Geographically Weighted Regression: A Case Study in Poznań, Poland](https://www.mdpi.com/2073-445X/12/1/125)
+## 4.2 [Assessing the Impact of Selected Attributes on Dwelling Prices Using Ordinary Least Squares Regression and Geographically Weighted Regression: A Case Study in Poznań, Poland](https://www.mdpi.com/2073-445X/12/1/125)
 
 ### Objective
 
@@ -135,7 +125,7 @@ Determine what factors affect transaction prices in Poznan, Poland.
 
 May be biassed as the OLS method does not take into account spatial autocorrelation.
 
-2.  Moran’ I Test
+2.  Moran' I Test
 
 Check if there are any spatial autocorrelation
 
@@ -147,7 +137,7 @@ Allows the estimation of local coefficients based on samples within the bandwidt
 
 OLS only explains around 23% of the variability of the observed phenomenon
 
-After conducting Moran’ I Test, the property prices seem to be spatially clustered and there is a positive spatial autocorrelation.
+After conducting Moran' I Test, the property prices seem to be spatially clustered and there is a positive spatial autocorrelation.
 
 GWR returned an R Squared value of 0.477 and AIC of 15597.432. This indicates that GWR Performed better compared to the OLS method.
 
@@ -159,7 +149,7 @@ Usage of other methods
 
 Feature engineering - the variables selected are based on information from local real estate offices, which might overlook other important variables
 
-## 6.3 [Use of Geographically Weighted Regression (GWR) Method to Estimate the Effects of Location Attributes on the Residential Property Values](https://core.ac.uk/download/pdf/295045695.pdf)
+## 4.3 [Use of Geographically Weighted Regression (GWR) Method to Estimate the Effects of Location Attributes on the Residential Property Values](https://core.ac.uk/download/pdf/295045695.pdf)
 
 ### Objective
 
@@ -176,7 +166,7 @@ A standard prediction model that does not take into account characteristics such
 
 ### Learning points
 
-![](images/litrev3.png) 
+![](images/litrev3.png)
 
 This shows that while a traditional HPM can explain 73% of the variances,  adding the spatial data can improve the accuracy.
 
@@ -184,13 +174,13 @@ The study shows that different locational attributes
 
 have differential spatial effects on residential property
 
-premiums across the study area. 
+premiums across the study area.
 
 ### Areas for improvement
 
 Interpretation on the GWR Results - we can use qualitative methods, such as focus groups on the affected areas, to get a better interpretation of the GWR results
 
-## 6.4 [Modelling Housing Rents Using Spatial Autoregressive Geographically Weighted Regression: A Case Study in Cracow, Poland](https://www.mdpi.com/2220-9964/9/6/346)
+## 4.4 [Modelling Housing Rents Using Spatial Autoregressive Geographically Weighted Regression: A Case Study in Cracow, Poland](https://www.mdpi.com/2220-9964/9/6/346)
 
 ### Objective
 
@@ -220,40 +210,44 @@ Exploring the thresholds of when and where spatial correlation and spatial heter
 
 Adapting the models to different spatial complexity, making it more portable and usable in different locations
 
-# 7. Main Features
+# 5. Main Features
 
-## 7.1 Interactive Map of Metro Manila and the house prices
+## 5.1 Exploratory Data Analysis
 
-Users can view an interactive point map of Metro Manila with some data points of houses. The map will be color-coded to show the house prices for each house in different areas. Users can click on the points to view the house prices and other details, which will be displayed on the side platform.
+-   Histogram to show distribution of different variables
+-   Correlation plot of the variables Browse through the dataset with a table
+-   Kernel Density Map of the different cities in Jakarta Adjustable bandwidth (in kilometres) and kernel method
 
-Users can also filter the map to show only the houses within a certain region. The map will zoom into the region so that users can see the distribution of house prices across the selected region.
+## 5.2 Descriptive Analysis
 
-Furthermore, users can input the house address of interest to get the predicted price that is calculated with our hedonic pricing model in the backend.
+-   Show insights on local importance of features that explains the price of the rental units
+-   Users can adjust the configuration of both the GWR and MLR models to perform a descriptive analysis of the value of rental units in Jakarta
 
-## 7.2 Geographically Weighted Regression Analysis Dashboard
+## 5.3 Predictive Analysis
 
-Upon inputting the address of interest, users can go to the GWR Analysis tab to be shown a dashboard reflecting the statistics in the selected area. Statistics shown includes:
+-   Predicts the price of the rental units based on the user input according to the chosen model (GWRF or MLR)
+-   Displays the performance of each model in terms of the predictions of the rental unit prices
 
--   Graphs of Linear Regression and Multiple Linear Regression
+# 6. UI Prototype
 
--   Tables/charts listing the significant factors that affect the house prices
+![](images/kde_screenshot.jpg) ![](images/descriptive_screenshot.jpg) ![](images/predictive_screenshot.jpg)
 
--   Bubble charts on the map showing the residual of the hedonic pricing
-
--   Bubble charts on the map showing the other statistics such as local R2 and coefficient estimates
-
-## 7.3 Cluster Analysis on High house prices
-
-This page will show the Spatial autocorrelation analysis of the prices of the houses in Metro Manila. We can see if there are clusters of places with high prices and low prices with the Global and Local Spatial autocorrelation analysis.
-
-# 8. UI Prototype
-
-![](images/feature1.png) ![](images/feature2.png) ![](images/feature3.png)
-
-# 10. Application Architecture
+# 7. Application Architecture
 
 ![](images/architecture.jpeg)
 
-# 11. Timeline
+# 8. Timeline
 
-![](images/timeline.png)
+|                                   | Week 8 | Week 9 | Week 10 | Week 11 | Week 12 | Week 13 |
+|:---------------------------------:|:------:|:------:|:-------:|:-------:|:-------:|:-------:|
+| Research, Proposal & Prototyping  |   ⚫   |        |         |         |         |         |
+| Data Scraping, Data preprocessing |   ⚫   |   ⚫   |         |         |         |         |
+|        Building Feature 1         |        |   ⚫   |   ⚫    |   ⚫    |         |         |
+|  Integrating & Testing Feature 1  |        |        |         |   ⚫    |         |         |
+|        Building Feature 2         |        |   ⚫   |   ⚫    |   ⚫    |         |         |
+|  Integrating & Testing Feature 2  |        |        |         |   ⚫    |         |         |
+|        Building Feature 3         |        |   ⚫   |   ⚫    |   ⚫    |         |         |
+|  Integrating & Testing Feature 3  |        |        |         |   ⚫    |         |         |
+|   Final Integration and Testing   |        |        |         |   ⚫    |   ⚫    |         |
+|      Poster & Research Paper      |        |        |         |   ⚫    |   ⚫    |   ⚫    |
+|     Presentation Preparation      |        |        |         |         |   ⚫    |   ⚫    |

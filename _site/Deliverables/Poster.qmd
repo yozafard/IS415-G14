@@ -1,0 +1,16 @@
+---
+title: "Project Poster"
+format: 
+  html:
+    code-fold: true
+    code-summary: "Show code"
+    toc-depth: 3
+author: "Alexander Vincent Lewi, Emily Aurelia, Yozafard Harold Siauheming"
+date: "9 April 2024"
+execute: 
+  message: false
+  warning: false
+  freeze: true
+---
+
+![](./images/poster.png)

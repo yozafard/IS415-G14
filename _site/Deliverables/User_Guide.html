@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Alexander Vincent Lewi, Emily Aurelia, Yozafard Harold Siauheming">
+<meta name="dcterms.date" content="2024-04-12">
 
-<title>IS415-G14 - GeoMommy</title>
+<title>IS415-G14 - User Guide</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,22 +25,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -61,7 +63,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -71,7 +73,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">IS415-G14</span>
     </a>
   </div>
@@ -82,15 +84,15 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./Deliverables/Proposal.html" rel="" target="">
+    <a class="nav-link" href="../Deliverables/Proposal.html" rel="" target="">
  <span class="menu-text">Project Proposal</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Deliverables/Poster.html" rel="" target="">
+    <a class="nav-link" href="../Deliverables/Poster.html" rel="" target="">
  <span class="menu-text">Project Poster</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Deliverables/User_Guide.html" rel="" target="">
+    <a class="nav-link" href="../Deliverables/User_Guide.html" rel="" target="">
  <span class="menu-text">User Guide</span></a>
   </li>  
 </ul>
@@ -116,8 +118,23 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#abstract" id="toc-abstract" class="nav-link active" data-scroll-target="#abstract">Abstract</a></li>
-  <li><a href="#important-links" id="toc-important-links" class="nav-link" data-scroll-target="#important-links">Important Links</a></li>
+  <li><a href="#eda" id="toc-eda" class="nav-link active" data-scroll-target="#eda">EDA</a>
+  <ul class="collapse">
+  <li><a href="#kernel-density-estimation" id="toc-kernel-density-estimation" class="nav-link" data-scroll-target="#kernel-density-estimation">Kernel Density Estimation</a></li>
+  <li><a href="#variable-distribution" id="toc-variable-distribution" class="nav-link" data-scroll-target="#variable-distribution">Variable Distribution</a></li>
+  <li><a href="#correlation-plot" id="toc-correlation-plot" class="nav-link" data-scroll-target="#correlation-plot">Correlation Plot</a></li>
+  <li><a href="#data-table" id="toc-data-table" class="nav-link" data-scroll-target="#data-table">Data Table</a></li>
+  </ul></li>
+  <li><a href="#descriptive-analysis" id="toc-descriptive-analysis" class="nav-link" data-scroll-target="#descriptive-analysis">Descriptive Analysis</a>
+  <ul class="collapse">
+  <li><a href="#geographically-weighted-regression" id="toc-geographically-weighted-regression" class="nav-link" data-scroll-target="#geographically-weighted-regression">Geographically Weighted Regression</a></li>
+  <li><a href="#multiple-linear-regression" id="toc-multiple-linear-regression" class="nav-link" data-scroll-target="#multiple-linear-regression">Multiple Linear Regression</a></li>
+  </ul></li>
+  <li><a href="#predictive-analysis" id="toc-predictive-analysis" class="nav-link" data-scroll-target="#predictive-analysis">Predictive Analysis</a>
+  <ul class="collapse">
+  <li><a href="#predicting-price" id="toc-predicting-price" class="nav-link" data-scroll-target="#predicting-price">Predicting Price</a></li>
+  <li><a href="#model-performance" id="toc-model-performance" class="nav-link" data-scroll-target="#model-performance">Model Performance</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -126,14 +143,26 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">GeoMommy</h1>
+<h1 class="title">User Guide</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Alexander Vincent Lewi, Emily Aurelia, Yozafard Harold Siauheming </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 12, 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -141,20 +170,77 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Welcome to GeoMommy Project page</p>
-<p>We are a group of 3, working on to make a room rental unit analysis in Jakarta. So, wait for more updates by visiting this page. Thank you!</p>
-<section id="abstract" class="level1">
-<h1>Abstract</h1>
-<p>This project investigates room rental price prediction in Jakarta using geospatial analysis methods to assist home owners, property agents, and potential business owners in the rental market. Through Geospatial Weighted Regression, both descriptive and predictive methods, and Kernel Density Estimation techniques, we explore the spatial dynamics and determinants of rental prices across Jakarta’s diverse neighborhoods. By analyzing publicly available datasets and employing machine learning algorithms, we uncover spatial patterns, identify high-demand areas, and segment neighborhoods based on rental price similarities. The project culminates in the development of interactive visualizations that convey insights intuitively, facilitating informed decision making and strategic planning in Jakarta’s evolving rental market.</p>
+<p>Welcome to the user guide! Here, we will be showing you how to use our Shiny App</p>
+<section id="eda" class="level1">
+<h1>EDA</h1>
+<p>The EDA is split into three different tabs here: Kernel Density Estimation, Variable Distribution, Correlation Plot, and Data Table</p>
+<section id="kernel-density-estimation" class="level2">
+<h2 class="anchored" data-anchor-id="kernel-density-estimation">Kernel Density Estimation</h2>
+<p><img src="images/kde_screenshot.jpg" class="img-fluid"></p>
+<p>The KDE Plot here will show the distribution of rental units, with price as additional weight, meaning that rental units with higher prices will have an additional weight on the plot.</p>
+<p>You can choose which city you want to view through this drop down button. “Select All” means you will be viewing the entire Jakarta.</p>
+<p><img src="images/kde_city_button.jpg" class="img-fluid" width="334"></p>
+<p>This slider will be used to select the bandwidth. The default value is 0.5 kilometres.</p>
+<p><img src="images/kde_bw_slider.jpg" class="img-fluid" width="394"></p>
+<p>And the last dropdown button will be used to select the kernel method</p>
+<p><img src="images/kde_kernel.jpg" class="img-fluid" width="356"></p>
 </section>
-<section id="important-links" class="level1">
-<h1>Important Links</h1>
-<ul>
-<li><a href="./Deliverables/Proposal.qmd">Project Proposal</a></li>
-<li><a href="./Deliverables/Poster.qmd">Project Poster</a></li>
-</ul>
+<section id="variable-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="variable-distribution">Variable Distribution</h2>
+<p>This tab will show the distribution of different variables in our dataset</p>
+<p><img src="images/eda_var_dist.jpg" class="img-fluid"> To change which variable you want to see, you can use the dropdown on the left</p>
+<p><img src="images/var_dist_dropdown.jpg" class="img-fluid" width="425"></p>
+</section>
+<section id="correlation-plot" class="level2">
+<h2 class="anchored" data-anchor-id="correlation-plot">Correlation Plot</h2>
+<p>The Correlation Plot will show which variables are highly correlated with each other.</p>
+<p><img src="images/eda_corrplot.jpg" class="img-fluid"></p>
+</section>
+<section id="data-table" class="level2">
+<h2 class="anchored" data-anchor-id="data-table">Data Table</h2>
+<p>In this tab, you can use the Data Table to view the entire dataset</p>
+<p><img src="images/eda_dt.jpg" class="img-fluid"></p>
+<p>Use this dropdown to change how many rows to display in one page</p>
+<p><img src="images/dt_dropdown.jpg" class="img-fluid" width="290"></p>
+</section>
+</section>
+<section id="descriptive-analysis" class="level1">
+<h1>Descriptive Analysis</h1>
+<p>The Descriptive Analysis section is split into two tabs: Geographically Weighted Regression and Multiple Linear Regression</p>
+<section id="geographically-weighted-regression" class="level2">
+<h2 class="anchored" data-anchor-id="geographically-weighted-regression">Geographically Weighted Regression</h2>
+<p><img src="images/gwr.png" class="img-fluid"></p>
+<p>In this tab, you can see the average values of the coefficient of chosen variables per desa (villages) in Jakarta.</p>
+<p><img src="images/gwr_coef.png" class="img-fluid" width="228"></p>
+<p>You can choose which variable you want to see the coefficient of using the dropdown on the left</p>
+<p>You can choose which variable you want to plot using the dropdown on the left side. There are many other drowdowns as well that you can use to customize the configuration of the GWR model, and see how different configuration affect the coefficient of the chosen variable.</p>
+</section>
+<section id="multiple-linear-regression" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-linear-regression">Multiple Linear Regression</h2>
+<p><img src="images/mlr.png" class="img-fluid"></p>
+<p>In this tab, you can see the summary of the multiple linear regression model. The plot will show you the average value of the coefficient of the chosen variable.</p>
+<p><img src="images/mlr_values.png" class="img-fluid" width="307"></p>
+<p>Similar to the GWR tab, you can choose which variable you want to see the coefficient of using the dropdown on the left. However, since MLR is a global model, you can’t see the coefficient of the variable per desa. You can choose to see the average fitted values, actual values, and the residuals per desa.</p>
+</section>
+</section>
+<section id="predictive-analysis" class="level1">
+<h1>Predictive Analysis</h1>
+<p>For the Predictive Analysis section, there are two subsection, the Predicting Price section and the Model Performance section.</p>
+<section id="predicting-price" class="level2">
+<h2 class="anchored" data-anchor-id="predicting-price">Predicting Price</h2>
+<p><img src="images/predictive_screenshot.jpg" class="img-fluid"> Users can see the prediction of the monthly rental price of a room in Jakarta. The prediction is based on the input of the user, which includes the type of predictive model that the user wants to use, the address of the rental unit, the gender allowed to stay in the room, the size of the room, and the building year.</p>
+<p><img src="images/predictive_model.png" class="img-fluid" width="473"></p>
+<p>The user can choose between two predictive models, namely Geographically Weighted Random Forest (GWRF) and Multiple Linear Regression (MLR).</p>
+<p><img src="images/predictive_address.png" class="img-fluid" width="471"></p>
+<p>The address must be within DKI Jakarta and searchable in OpenStreetMap (OSM) as our data is only within Jakarta and we use the OSM API to geocode. Once the user has inputted all the data, the user can click the “Predict” button to see the predicted price of the rental unit.</p>
+<p><img src="images/predictive_result.png" class="img-fluid"> The location of the rental unit will also be shown in the map and the predicted price will be shown below the map.</p>
+</section>
+<section id="model-performance" class="level2">
+<h2 class="anchored" data-anchor-id="model-performance">Model Performance</h2>
+<p><img src="images/predictive_performance.png" class="img-fluid"> This page will show the selected model performance. The graph that is shown in based on our test dataset. We did an 80-20 train-test split for the MLR model and a 60-40 train-test split for the GWRF. This difference in the split for each model is because of the time taken for the models to train. The user can also see the Mean Absolute Percentage Error (MAPE) of the model below the graph.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
