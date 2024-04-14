@@ -1,6 +1,11 @@
 library(shiny)
 library(shinycssloaders)
-
+coef_choices <- c("Price", "Price (Log Transformed)", "Gender", "Size", "Year of Construction", 
+                  "Proximity to Airport", "Proximity to Church", 
+                  "Proximity to Post Office", "Proximity to Health Facilities",
+                  "Proximity to Mosque", "Proximity to Railway Station", 
+                  "Proximity to Vihara", "Education Facilities Count within Range", 
+                  "Pura Count within Range")
 # Define UI for application that draws a histogram
 kde_ui <- fluidPage(
   # Application title can be added here if needed
@@ -12,11 +17,6 @@ kde_ui <- fluidPage(
              sidebarLayout(
                sidebarPanel(
                  # Inputs specific to Kernel Density Estimation
-                 selectInput("kde_type",
-                             "Select KDE Type:",
-                             choices = c("Price Density" = "with_price",
-                                         "Room Density" = "without_price")
-                             ),
                  selectInput("city",
                              "Select City:",
                              choices = c("Select All" = "DKI Jakarta", 
@@ -45,22 +45,21 @@ kde_ui <- fluidPage(
                )
              )
     ),
-    # Second tab with its own sidebar and main panel
     tabPanel("Variable Distribution",
              sidebarLayout(
                sidebarPanel(
-                 uiOutput("variableSelect")  # Dynamic UI for selecting variable
+                 selectInput(
+                   inputId = "var", 
+                   label = "Select Variable:", 
+                   choices = coef_choices,
+                   selected = "Price"),
                ),
                mainPanel(
-                 # Output for the Variable Distribution plot
-                 # Define plotOutput or other output here
                  shinycssloaders::withSpinner(plotOutput("varDistPlot"), type = 8, color = "#2caa4a")
                  
                )
              )
     ),
-    # More tabs can be added here similarly
-    # ...
     tabPanel("Correlation Plot",
              sidebarLayout(
                sidebarPanel(
@@ -82,15 +81,15 @@ kde_ui <- fluidPage(
     tabPanel("Data Table",
              sidebarLayout(
                sidebarPanel(
-                helpText("
+                 helpText("
                          This is the Data Table
                          ")
                ),
                mainPanel(
                  # Output for the Variable Distribution plot
                  # Define plotOutput or other output here
-                 shinycssloaders::withSpinner(dataTableOutput("dataTable"), type = 8, color = "#2caa4a")
-
+                 shinycssloaders::withSpinner(DT::dataTableOutput("dataTable"), type = 8, color = "#2caa4a")
+                 
                )
              )
     ),
