@@ -207,21 +207,21 @@
     "href": "deliverables/Proposal.html",
     "title": "Project Proposal",
     "section": "",
-    "text": "The escalating demand for accurate and geographically nuanced house pricing in Metro Manila necessitates innovative methods for analyzing real estate data. This project proposes an advanced analytical platform that integrates Interactive Maps, Geographically Weighted Regression Analysis Dashboards, and Cluster Analysis to provide detailed insights into house prices across Metro Manila. By leveraging real estate data scraped from Lamudi and geospatial data of the Philippines, the project aims to shed light on the spatial dynamics and factors influencing house prices.\nThrough methodologies such as Geographically Weighted Regression (GWR) and Kernel Density Estimation, the platform will offer both visual and quantitative analyses to cater to different stakeholders, including potential homebuyers, real estate agents, and policymakers. This project is designed to overcome the limitations of traditional appraisal methods by offering a more localized and dynamic analysis of the real estate market."
+    "text": "This project investigates room rental price prediction in Jakarta using geospatial analysis methods to assist home owners, property agents, and potential business owners in the rental market. Through Geospatial Weighted Regression, both descriptive and predictive methods, and Kernel Density Estimation techniques, we explore the spatial dynamics and determinants of rental prices across Jakarta’s diverse neighborhoods. By analyzing publicly available datasets and employing machine learning algorithms, we uncover spatial patterns, identify high-demand areas, and segment neighborhoods based on rental price similarities. The project culminates in the development of interactive visualizations that convey insights intuitively, facilitating informed decision making and strategic planning in Jakarta’s evolving rental market."
   },
   {
     "objectID": "deliverables/Proposal.html#data-preparation",
     "href": "deliverables/Proposal.html#data-preparation",
     "title": "Project Proposal",
     "section": "5.1 Data Preparation",
-    "text": "5.1 Data Preparation\n\n1. Data Sourcing\nOur dataset will be sourced from Lamudi, a real-estate listing website in the Phillipines\n\n\n2. Data Importing\nThe data importing will leverage on R libraries, such as dplyr for aspatial data, and sf for geospatial data\n\n\n3. Data Wrangling\nThe imported data undergoes cleaning and preprocessing to address missing values, outliers, and inconsistencies. This stage may involve normalization, encoding categorical variables, and data transformation to ensure compatibility with analysis methods."
+    "text": "5.1 Data Preparation\n\n1. Data Sourcing\nOur dataset will be sourced from Mamikos, a property rental platform in Indonesia. We will be focusing only on Jakarta’s rental units, as it is the capital city and the most populous city in Indonesia. The dataset will include rental prices, room sizes, and other relevant features that influence rental prices. The data is scraped using Selenium and BeautifulSoup libraries in Python.\n\n\n2. Data Importing\nThe data importing will leverage on R libraries, such as dplyr for aspatial data, and sf for geospatial data. The data will be imported into R for further analysis and visualization.\n\n\n3. Data Wrangling\nThe imported data undergoes cleaning and preprocessing to address missing values, outliers, and inconsistencies. This stage may involve normalization, encoding categorical variables, and data transformation to ensure compatibility with analysis methods. The data will be transformed into a spatial data frame using the sf library."
   },
   {
     "objectID": "deliverables/Proposal.html#exploratory-data-analysis",
     "href": "deliverables/Proposal.html#exploratory-data-analysis",
     "title": "Project Proposal",
     "section": "5.2 Exploratory Data Analysis",
-    "text": "5.2 Exploratory Data Analysis\n\n1. Statistical Graphs: Histogram, Box Plot\nKey distributions and relationships within the data are visualized using histograms and box plots. Histograms reveal the distribution of rental prices and other numerical variables, while box plots identify outliers and the spread of data across categorical variables.\n\n\n2. Choropleth\nThese maps provide a visual representation of rental price variations across different geographical areas, highlighting regions with higher or lower average rental prices.\n\n\n3. Kernel Density Estimation\nKDE plots help identify the density of rental properties across the city, offering insights into high-demand areas and potential patterns of spatial clustering."
+    "text": "5.2 Exploratory Data Analysis\n\n1. Statistical Graphs: Histogram, Box Plot\nKey distributions and relationships within the data are visualized using histograms and box plots. Histograms reveal the distribution of rental prices and other numerical variables, while box plots identify outliers and the spread of data across categorical variables.\n\n\n2. Point Pattern Analysis - Kernel Density Estimation\nKDE plots help identify the density of rental properties across the city, offering insights into high-demand areas and potential patterns of spatial clustering. Price will also be used as a weight in the calculation, to offer more insight on high price rentals"
   },
   {
     "objectID": "deliverables/Proposal.html#hedonic-pricing-model---ordinary-least-squares-regression",
@@ -255,22 +255,22 @@
     "objectID": "deliverables/Proposal.html#assessing-the-impact-of-selected-attributes-on-dwelling-prices-using-ordinary-least-squares-regression-and-geographically-weighted-regression-a-case-study-in-poznań-poland",
     "href": "deliverables/Proposal.html#assessing-the-impact-of-selected-attributes-on-dwelling-prices-using-ordinary-least-squares-regression-and-geographically-weighted-regression-a-case-study-in-poznań-poland",
     "title": "Project Proposal",
-    "section": "6.2 Assessing the Impact of Selected Attributes on Dwelling Prices Using Ordinary Least Squares Regression and Geographically Weighted Regression: A Case Study in Poznań, Poland",
-    "text": "6.2 Assessing the Impact of Selected Attributes on Dwelling Prices Using Ordinary Least Squares Regression and Geographically Weighted Regression: A Case Study in Poznań, Poland\n\nObjective\nDetermine what factors affect transaction prices in Poznan, Poland.\n\n\nMethodology\n\nOrdinary Least Squares\n\nMay be biassed as the OLS method does not take into account spatial autocorrelation.\n\nMoran’ I Test\n\nCheck if there are any spatial autocorrelation\n\nGeographically Weighted Regression\n\nAllows the estimation of local coefficients based on samples within the bandwidth of a local location, which can solve the problem of spatial autocorrelation\n\n\nLearning points\nOLS only explains around 23% of the variability of the observed phenomenon\nAfter conducting Moran’ I Test, the property prices seem to be spatially clustered and there is a positive spatial autocorrelation.\nGWR returned an R Squared value of 0.477 and AIC of 15597.432. This indicates that GWR Performed better compared to the OLS method.\n\n\nAreas for improvement\nGathering more precise data\nUsage of other methods\nFeature engineering - the variables selected are based on information from local real estate offices, which might overlook other important variables"
+    "section": "4.2 Assessing the Impact of Selected Attributes on Dwelling Prices Using Ordinary Least Squares Regression and Geographically Weighted Regression: A Case Study in Poznań, Poland",
+    "text": "4.2 Assessing the Impact of Selected Attributes on Dwelling Prices Using Ordinary Least Squares Regression and Geographically Weighted Regression: A Case Study in Poznań, Poland\n\nObjective\nDetermine what factors affect transaction prices in Poznan, Poland.\n\n\nMethodology\n\nOrdinary Least Squares\n\nMay be biassed as the OLS method does not take into account spatial autocorrelation.\n\nMoran’ I Test\n\nCheck if there are any spatial autocorrelation\n\nGeographically Weighted Regression\n\nAllows the estimation of local coefficients based on samples within the bandwidth of a local location, which can solve the problem of spatial autocorrelation\n\n\nLearning points\nOLS only explains around 23% of the variability of the observed phenomenon\nAfter conducting Moran’ I Test, the property prices seem to be spatially clustered and there is a positive spatial autocorrelation.\nGWR returned an R Squared value of 0.477 and AIC of 15597.432. This indicates that GWR Performed better compared to the OLS method.\n\n\nAreas for improvement\nGathering more precise data\nUsage of other methods\nFeature engineering - the variables selected are based on information from local real estate offices, which might overlook other important variables"
   },
   {
     "objectID": "deliverables/Proposal.html#use-of-geographically-weighted-regression-gwr-method-to-estimate-the-effects-of-location-attributes-on-the-residential-property-values",
     "href": "deliverables/Proposal.html#use-of-geographically-weighted-regression-gwr-method-to-estimate-the-effects-of-location-attributes-on-the-residential-property-values",
     "title": "Project Proposal",
-    "section": "6.3 Use of Geographically Weighted Regression (GWR) Method to Estimate the Effects of Location Attributes on the Residential Property Values",
-    "text": "6.3 Use of Geographically Weighted Regression (GWR) Method to Estimate the Effects of Location Attributes on the Residential Property Values\n\nObjective\nEstimate the effect of locational attributes on property values in Kuala Lumpur\n\n\nMethodology\n\nHedonic Pricing Model (HPM)\n\nA standard prediction model that does not take into account characteristics such as spatial autocorrelation and spatial heterogeneity\n\nGeographically Weighted Regression (GWR)\nBuilt on top of the HPM to prevents issues with spatial characteristics in the data\n\n\n\nLearning points\n\nThis shows that while a traditional HPM can explain 73% of the variances,  adding the spatial data can improve the accuracy.\nThe study shows that different locational attributes\nhave differential spatial effects on residential property\npremiums across the study area. \n\n\nAreas for improvement\nInterpretation on the GWR Results - we can use qualitative methods, such as focus groups on the affected areas, to get a better interpretation of the GWR results"
+    "section": "4.3 Use of Geographically Weighted Regression (GWR) Method to Estimate the Effects of Location Attributes on the Residential Property Values",
+    "text": "4.3 Use of Geographically Weighted Regression (GWR) Method to Estimate the Effects of Location Attributes on the Residential Property Values\n\nObjective\nEstimate the effect of locational attributes on property values in Kuala Lumpur\n\n\nMethodology\n\nHedonic Pricing Model (HPM)\n\nA standard prediction model that does not take into account characteristics such as spatial autocorrelation and spatial heterogeneity\n\nGeographically Weighted Regression (GWR)\nBuilt on top of the HPM to prevents issues with spatial characteristics in the data\n\n\n\nLearning points\n\nThis shows that while a traditional HPM can explain 73% of the variances,  adding the spatial data can improve the accuracy.\nThe study shows that different locational attributes\nhave differential spatial effects on residential property\npremiums across the study area.\n\n\nAreas for improvement\nInterpretation on the GWR Results - we can use qualitative methods, such as focus groups on the affected areas, to get a better interpretation of the GWR results"
   },
   {
     "objectID": "deliverables/Proposal.html#modelling-housing-rents-using-spatial-autoregressive-geographically-weighted-regression-a-case-study-in-cracow-poland",
     "href": "deliverables/Proposal.html#modelling-housing-rents-using-spatial-autoregressive-geographically-weighted-regression-a-case-study-in-cracow-poland",
     "title": "Project Proposal",
-    "section": "6.4 Modelling Housing Rents Using Spatial Autoregressive Geographically Weighted Regression: A Case Study in Cracow, Poland",
-    "text": "6.4 Modelling Housing Rents Using Spatial Autoregressive Geographically Weighted Regression: A Case Study in Cracow, Poland\n\nObjective\nIdentify the determinants of rental prices in Cracow, Poland\n\n\nMethodology\n\nOrdinary Least Squares Regression\n\nInsufficient as the model does not take into account spatial relationships\n\nSpatial Autoregressive Model (SAR)\n\nIncludes a spatially lagged dependent variable to capture the influence of rental prices in nearby locations\n\nMixed Geographically Weighted Regression - Spatial Autoregressive Model (MGWR-SAR)\n\nCombined GWR with SAR\n\n\nLearning points\nGWR-SAR performed the best, as it can take in both both spatial non-stationarity of the parameters of determinants and change over space of the spatial autoregressive parameter\n\n\nAreas for improvement\nExploring the thresholds of when and where spatial correlation and spatial heterogeneity becomes a significant factor in the analysis\nAdapting the models to different spatial complexity, making it more portable and usable in different locations"
+    "section": "4.4 Modelling Housing Rents Using Spatial Autoregressive Geographically Weighted Regression: A Case Study in Cracow, Poland",
+    "text": "4.4 Modelling Housing Rents Using Spatial Autoregressive Geographically Weighted Regression: A Case Study in Cracow, Poland\n\nObjective\nIdentify the determinants of rental prices in Cracow, Poland\n\n\nMethodology\n\nOrdinary Least Squares Regression\n\nInsufficient as the model does not take into account spatial relationships\n\nSpatial Autoregressive Model (SAR)\n\nIncludes a spatially lagged dependent variable to capture the influence of rental prices in nearby locations\n\nMixed Geographically Weighted Regression - Spatial Autoregressive Model (MGWR-SAR)\n\nCombined GWR with SAR\n\n\nLearning points\nGWR-SAR performed the best, as it can take in both both spatial non-stationarity of the parameters of determinants and change over space of the spatial autoregressive parameter\n\n\nAreas for improvement\nExploring the thresholds of when and where spatial correlation and spatial heterogeneity becomes a significant factor in the analysis\nAdapting the models to different spatial complexity, making it more portable and usable in different locations"
   },
   {
     "objectID": "deliverables/Proposal.html#interactive-map-of-metro-manila-and-the-house-prices",
@@ -425,5 +425,54 @@
     "title": "User Guide",
     "section": "Model Performance",
     "text": "Model Performance\n This page will show the selected model performance. The graph that is shown in based on our test dataset. We did an 80-20 train-test split for the MLR model and a 60-40 train-test split for the GWRF. This difference in the split for each model is because of the time taken for the models to train. The user can also see the Mean Absolute Percentage Error (MAPE) of the model below the graph."
+  },
+  {
+    "objectID": "deliverables/Proposal.html#descriptive-analytics",
+    "href": "deliverables/Proposal.html#descriptive-analytics",
+    "title": "Project Proposal",
+    "section": "5.3 Descriptive Analytics",
+    "text": "5.3 Descriptive Analytics\n\n1. Multiple Linear Regression (MLR)\nMultiple Linear Regression is used to provide a global overview of how each feature affects the price of rental units in Jakarta. This model will be used to identify the most important features that affect the price of rental units in Jakarta.\n\n\n2. Geographically Weighted Regression (GWR)\nUsing Geographically Weighted Regression, we are aiming to give users an insight of how each feature affects the price of rental units in each region of Jakarta. This model will be used to identify the most important features that affect the price of rental units in each region of Jakarta."
+  },
+  {
+    "objectID": "deliverables/Proposal.html#predictive-analytics",
+    "href": "deliverables/Proposal.html#predictive-analytics",
+    "title": "Project Proposal",
+    "section": "5.4 Predictive Analytics",
+    "text": "5.4 Predictive Analytics\n\n1. Multiple Linear Regression\nWe are using a standard Multiple Linear Regression to predict the price of a rental unit, based on user inputs. The user inputs would be location (taken from the address that the user inputted), the gender of the room (if it’s a mixed unit, male-only, or female-only), size of the unit in meter square, and the year that the building is built or last renovated.\n\n\n2. Geographically Weighted Random Forest\nBuilding on the Multiple Linear Regression, we wanted to improve it further by introducing location as a geospatial feature to add more weight for closer units."
+  },
+  {
+    "objectID": "deliverables/Proposal.html#geographically-weighted-random-forest-1",
+    "href": "deliverables/Proposal.html#geographically-weighted-random-forest-1",
+    "title": "Project Proposal",
+    "section": "3.3 Geographically Weighted Random Forest",
+    "text": "3.3 Geographically Weighted Random Forest"
+  },
+  {
+    "objectID": "deliverables/Proposal.html#a-spatial-regression-model-for-predicting-prices-of-short-term-rentals-in-athens-greece",
+    "href": "deliverables/Proposal.html#a-spatial-regression-model-for-predicting-prices-of-short-term-rentals-in-athens-greece",
+    "title": "Project Proposal",
+    "section": "4.1 A Spatial Regression Model for Predicting Prices of Short-Term Rentals in Athens, Greece",
+    "text": "4.1 A Spatial Regression Model for Predicting Prices of Short-Term Rentals in Athens, Greece\n\nObjective\nExplores the factors affecting the prices of short-term rental properties listed on Airbnb in Athens, Greece. Using spatial data analysis, the study focuses on identifying significant predictors of rental prices, including property features, host attributes, review characteristics, and various location attributes\n\n\nMethodology\n\nMultiple Regression Analysis (Ordinary Least Squares)\n\nExplains the regression of a dependent variable over more than one independent variable\n\nGeographically Weighted Regression\n\nA linear regression model which pays more attention to the local regression based on spatial relationship\n\n\nLearning points\n\nConsistent across studies is the finding that location significantly influences short-term rental prices. Proximity to tourist attractions, amenities, and transport links are pivotal in determining price points.\nThe characteristics of the property, such as the number of bedrooms and bathrooms, along with host-related factors like reviews and superhost status, play a crucial role in pricing\n\n\nAreas for improvement\nConcentrate on the rentals with high residuals and analyze the neighborhood characteristics and the amenities they offer. In addition, replacing Euclidean distances with distances along the road network might improve the results of the OLS model"
+  },
+  {
+    "objectID": "deliverables/Proposal.html#exploratory-data-analysis-1",
+    "href": "deliverables/Proposal.html#exploratory-data-analysis-1",
+    "title": "Project Proposal",
+    "section": "5.1 Exploratory Data Analysis",
+    "text": "5.1 Exploratory Data Analysis\n\nHistogram to show distribution of different variables\nCorrelation plot of the variables Browse through the dataset with a table\nKernel Density Map of the different cities in Jakarta Adjustable bandwidth (in kilometres) and kernel method"
+  },
+  {
+    "objectID": "deliverables/Proposal.html#descriptive-analysis",
+    "href": "deliverables/Proposal.html#descriptive-analysis",
+    "title": "Project Proposal",
+    "section": "5.2 Descriptive Analysis",
+    "text": "5.2 Descriptive Analysis\n\nShow insights on local importance of features that explains the price of the rental units\nUsers can adjust the configuration of both the GWR and MLR models to perform a descriptive analysis of the value of rental units in Jakarta"
+  },
+  {
+    "objectID": "deliverables/Proposal.html#predictive-analysis",
+    "href": "deliverables/Proposal.html#predictive-analysis",
+    "title": "Project Proposal",
+    "section": "5.3 Predictive Analysis",
+    "text": "5.3 Predictive Analysis\n\nPredicts the price of the rental units based on the user input according to the chosen model (GWRF or MLR)\nDisplays the performance of each model in terms of the predictions of the rental unit prices"
   }
 ]
