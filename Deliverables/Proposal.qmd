@@ -89,7 +89,7 @@ Building on the Multiple Linear Regression, we wanted to improve it further by i
 
 ### Objective
 
-explores the factors affecting the prices of short-term rental properties listed on Airbnb in Athens, Greece. Using spatial data analysis, the study focuses on identifying significant predictors of rental prices, including property features, host attributes, review characteristics, and various location attributes
+Explores the factors affecting the prices of short-term rental properties listed on Airbnb in Athens, Greece. Using spatial data analysis, the study focuses on identifying significant predictors of rental prices, including property features, host attributes, review characteristics, and various location attributes
 
 ### Methodology
 
@@ -111,7 +111,7 @@ The characteristics of the property, such as the number of bedrooms and bathroom
 
 ### Areas for improvement
 
-concentrate on the rentals with high residuals and analyze the neighborhood characteristics and the amenities they offer. In addition, replacing Euclidean distances with distances along the road network might improve the results of the OLS model
+Concentrate on the rentals with high residuals and analyze the neighborhood characteristics and the amenities they offer. In addition, replacing Euclidean distances with distances along the road network might improve the results of the OLS model
 
 ## 4.2 [Assessing the Impact of Selected Attributes on Dwelling Prices Using Ordinary Least Squares Regression and Geographically Weighted Regression: A Case Study in Poznań, Poland](https://www.mdpi.com/2073-445X/12/1/125)
 
@@ -174,7 +174,7 @@ The study shows that different locational attributes
 
 have differential spatial effects on residential property
 
-premiums across the study area. 
+premiums across the study area.
 
 ### Areas for improvement
 
@@ -229,7 +229,7 @@ Adapting the models to different spatial complexity, making it more portable and
 
 # 6. UI Prototype
 
-![](images/feature1.png) ![](images/feature2.png) ![](images/feature3.png)
+![](images/kde_screenshot.jpg) ![](images/descriptive_screenshot.jpg) ![](images/predictive_screenshot.jpg)
 
 # 7. Application Architecture
 
