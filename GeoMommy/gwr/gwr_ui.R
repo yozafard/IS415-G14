@@ -53,14 +53,15 @@ gwr_ui <- tabPanel(
         tabPanel(
           "Geographically Weighted Regression",
           value = "gwr",
-          shinycssloaders::withSpinner(tmapOutput("GWRPlot"), type = 8, color = "#2caa4a")
+          shinycssloaders::withSpinner(tmapOutput("GWRPlot"), type = 8, color = "#2caa4a"),
+          helpText("This choropleth map shows the average coefficient of the selected variable across all the locations. The color intensity represents the strength of the relationship between the selected variable and the dependent variable. The greener the color, the stronger the positive relationship. Conversely, the redder the color, the stronger the negative relationship.")
         ),
         tabPanel(
           "Multiple Linear Regression",
           value = "mlr",
           fluidRow(
             column(12, shinycssloaders::withSpinner(tmapOutput("MLRDPlot"), type = 8, color = "#2caa4a")),
-            column(12, shinycssloaders::withSpinner(dataTableOutput("MLRDCoef"), type = 8, color = "#2caa4a"))
+            column(12, shinycssloaders::withSpinner(DT::dataTableOutput("MLRDCoef"), type = 8, color = "#2caa4a"))
           ),
         ),
       )
