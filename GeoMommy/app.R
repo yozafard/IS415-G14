@@ -17,13 +17,13 @@ ui <- fluidPage(
   navbarPage("GeoMommy",
     tabPanel("EDA", kde_ui),
     tabPanel("Descriptive", gwr_ui),
-    tabPanel("Predictive", gwrf_ui)
+    # tabPanel("Predictive", gwrf_ui)
   )
 ) 
 server <- function(input, output) {
   source("kde/kde.R", local = TRUE)
   source("gwr/gwr.R", local = TRUE)
-  source("gwrf/gwrf.R", local = TRUE)
+  # source("gwrf/gwrf.R", local = TRUE)
   
 }
 

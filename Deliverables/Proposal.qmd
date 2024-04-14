@@ -27,9 +27,9 @@ In light of the complexities and the lack of accurate, accessible tools for anal
 
 # 4. Data Source
 
--   Real Estate Price Data
+-   Rental Listing Data
 
-Rental unit prices data scraped from [Mamikos](https://mamikos.com/), a popular leading property rental platform and management company in Indonesia. This dataset contains the listing price of rental units along with their respective features like size of the rooms, price, etc.
+Rental unit data scraped from [Mamikos](https://mamikos.com/), a popular leading property rental platform and management company in Indonesia. This dataset contains the listing price of rental units along with their respective features like size of the rooms, price, etc.
 
 -   Geospatial data of Jakarta
 
@@ -41,15 +41,15 @@ A shapefile contains the borders of administrative regions of Jakarta, along wit
 
 ### 1. Data Sourcing
 
-Our dataset will be sourced from Mamikos, a property rental platform in Indonesia. We will be focusing only on Jakarta's rental
+Our dataset will be sourced from Mamikos, a property rental platform in Indonesia. We will be focusing only on Jakarta's rental units, as it is the capital city and the most populous city in Indonesia. The dataset will include rental prices, room sizes, and other relevant features that influence rental prices. The data is scraped using Selenium and BeautifulSoup libraries in Python.
 
 ### 2. Data Importing
 
-The data importing will leverage on R libraries, such as dplyr for aspatial data, and sf for geospatial data
+The data importing will leverage on R libraries, such as dplyr for aspatial data, and sf for geospatial data. The data will be imported into R for further analysis and visualization.
 
 ### 3. Data Wrangling
 
-The imported data undergoes cleaning and preprocessing to address missing values, outliers, and inconsistencies. This stage may involve normalization, encoding categorical variables, and data transformation to ensure compatibility with analysis methods.
+The imported data undergoes cleaning and preprocessing to address missing values, outliers, and inconsistencies. This stage may involve normalization, encoding categorical variables, and data transformation to ensure compatibility with analysis methods. The data will be transformed into a spatial data frame using the sf library.
 
 ## 5.2 Exploratory Data Analysis
 
@@ -63,13 +63,13 @@ KDE plots help identify the density of rental properties across the city, offeri
 
 ## 5.3 Descriptive Analytics
 
-### 1. Multiple Linear Regression
+### 1. Multiple Linear Regression (MLR)
 
-idk what to put
+Multiple Linear Regression is used to provide a global overview of how each feature affects the price of rental units in Jakarta. This model will be used to identify the most important features that affect the price of rental units in Jakarta.
 
-### 2. Geographically Weighted Regression
+### 2. Geographically Weighted Regression (GWR)
 
-Using Geographically Weighted Regression, we are aiming to give users an insight of how each feature affects the price of rental units in each region
+Using Geographically Weighted Regression, we are aiming to give users an insight of how each feature affects the price of rental units in each region of Jakarta. This model will be used to identify the most important features that affect the price of rental units in each region of Jakarta.
 
 ## 5.4 Predictive Analytics
 
@@ -224,6 +224,7 @@ Adapting the models to different spatial complexity, making it more portable and
 -   Users can adjust the configuration of both the GWR and MLR models to perform a descriptive analysis of the value of rental units in Jakarta
 
 ## 5.3 Predictive Analysis
+
 -   Predicts the price of the rental units based on the user input according to the chosen model (GWRF or MLR)
 -   Displays the performance of each model in terms of the predictions of the rental unit prices
 
