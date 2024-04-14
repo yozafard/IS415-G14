@@ -1,4 +1,9 @@
-coef_choices <- c("gender", "size", "building_year", "prox_airport", "prox_gereja", "prox_kantorpos", "prox_kesehatan", "prox_masjid", "prox_stasiunka", "prox_vihara", "pendidikan_within_med", "pura_within_med")
+coef_choices <- c("Gender", "Size", "Year of Construction", 
+                  "Proximity to Airport", "Proximity to Church", 
+                  "Proximity to Post Office", "Proximity to Health Facilities",
+                  "Proximity to Mosque", "Proximity to Railway Station", 
+                  "Proximity to Vihara", "Education Facilities Count within Range", 
+                  "Pura Count within Range")
 mlr_choices <- c("fitted values", "actual values", "residuals")
 
 gwr_ui <- tabPanel(
@@ -11,7 +16,7 @@ gwr_ui <- tabPanel(
           inputId = "gwr_coef", 
           label = "Select Cofficient to Plot:", 
           choices = coef_choices,
-          selected = "size"),
+          selected = "Size"),
         selectInput(
           inputId = "bw", 
           label = "Select Type of Bandwidth:", 
@@ -37,7 +42,7 @@ gwr_ui <- tabPanel(
         condition = "input.tabSelected == 'mlr'",
         selectInput(
           inputId = "mlr_coef", 
-          label = "Select Cofficient to Plot:", 
+          label = "Select Values to Plot:", 
           choices = mlr_choices,
           selected = "fitted values"),
       )
@@ -53,7 +58,10 @@ gwr_ui <- tabPanel(
         tabPanel(
           "Multiple Linear Regression",
           value = "mlr",
-          shinycssloaders::withSpinner(tmapOutput("MLRDPlot"), type = 8, color = "#2caa4a")
+          fluidRow(
+            column(12, shinycssloaders::withSpinner(tmapOutput("MLRDPlot"), type = 8, color = "#2caa4a")),
+            column(12, shinycssloaders::withSpinner(dataTableOutput("MLRDCoef"), type = 8, color = "#2caa4a"))
+          ),
         ),
       )
     )

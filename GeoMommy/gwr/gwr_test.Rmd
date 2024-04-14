@@ -187,3 +187,95 @@ tm_shape(jakarta_gwr) +  # Your spatial polygons data
 
 tmap_mode("plot")
 ```
+
+```{r}
+pacman::p_load(sf, tmap, dplyr, DT)
+english_translations <- c("Gender", "Size", "Year of Construction", 
+                          "Proximity to Airport", "Proximity to Church", 
+                          "Proximity to Post Office", "Proximity to Health Facilities",
+                          "Proximity to Mosque", "Proximity to Railway Station", 
+                          "Proximity to Vihara", "Education Facilities within Range", 
+                          "Pura within Range")
+mlrd <- readRDS("data/mlr.rds")
+datatable(mlrd$coefficients |> as.data.frame(),
+          colnames = c("Variable", "Coefficient"),
+          rownames = c("Intercept", english_translations))
+
+
+mamikos_mlr <- read_rds("data/mamikos_final.rds") |> 
+  mutate(`fitted values` = mlrd$fitted.values, 
+         `residuals` = mlrd$residuals,
+         `actual values` = mlrd$model$price_monthly)
+
+jakarta_mlr <-  readRDS("data/jakarta_sf.rds") |>
+  st_join(mamikos_mlr) |> 
+  group_by(geometry, NAMOBJ) |> 
+  summarise(across(where(is.numeric), ~mean(.x, na.rm = TRUE)),
+            .groups = "drop")
+
+mamikos_palette <- colorRampPalette(c("#f95516", "#dbdbdb", "#2caa4a"))(100)
+
+coef_choices <- c("gender", "size", "building_year", "prox_airport", 
+                  "prox_gereja", "prox_kantorpos", "prox_kesehatan", 
+                  "prox_masjid", "prox_stasiunka", "prox_vihara", 
+                  "pendidikan_within_med", "pura_within_med")
+
+english_translations <- c("Gender", "Size", "Year of Construction", 
+                          "Proximity to Airport", "Proximity to Church", 
+                          "Proximity to Post Office", "Proximity to Health Facilities",
+                          "Proximity to Mosque", "Proximity to Railway Station", 
+                          "Proximity to Vihara", "Education Facilities within Range", 
+                          "Pura within Range")
+
+names(coef_choices) <- english_translations
+
+# Server logic for GWR
+output = c()
+output$GWRPlot <- renderTmap({
+  plotted_coefficient <- coef_choices[input$gwr_coef]
+  print(plotted_coefficient)
+  
+  bw <- input$bw
+  bwc <- input$bwc
+  dist <- input$dist
+  kernel <- input$gwr_kernel
+  
+  # Load the processed GWR model
+  fname <- paste0("gwr/data/jakarta_gwr/", bw, "_", bwc, "_", dist, "_", kernel, ".rds")
+  jakarta_gwr <- readRDS(fname)
+  
+  # Use the reverse palette for the standard error
+  paletteToUse <- if(plotted_coefficient == "size_SE") rev(mamikos_palette) else mamikos_palette
+  
+  tmap_mode("view")
+  map <- tm_shape(jakarta_gwr) +
+    tm_fill(col=plotted_coefficient,
+            style="quantile",
+            palette=paletteToUse,
+            title=input$gwr_coef,
+            midpoint = 0,
+            popup.vars=c(plotted_coefficient)) +
+    tm_borders() +
+    tm_view(set.zoom.limits = c(11,14))  # Set zoom limits
+  map
+})
+
+output$MLRDPlot <- renderTmap({
+  
+  plotted_coefficient <- input$mlr_coef
+  # Use the reverse palette for the standard error
+  paletteToUse <- if(plotted_coefficient == "size_SE") rev(mamikos_palette) else mamikos_palette
+  
+  tmap_mode("view")
+  map <- tm_shape(jakarta_mlr) +
+    tm_fill(col=input$mlr_coef,
+            style="quantile",
+            palette=paletteToUse,
+            title=input$mlr_coef,
+            midpoint = 0,
+            popup.vars=c(plotted_coefficient)) +
+    tm_borders() +
+    tm_view(set.zoom.limits = c(11,14))  # Set zoom limits
+  map
+})
+```

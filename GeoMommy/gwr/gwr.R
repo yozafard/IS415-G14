@@ -1,15 +1,14 @@
-pacman::p_load(car, olsrr, corrplot, ggpubr, sf, spdep, GWmodel, tmap, tidyverse, gtsummary)
+pacman::p_load(sf, dplyr, tmap, DT)
 
+# d stands for descriptive
 mlrd <- readRDS("gwr/data/mlr.rds")
-jakarta_sf <- readRDS("gwr/data/jakarta_sf.rds")
-mamikos_final <- read_rds("gwr/data/mamikos_final.rds")
-mamikos_mlr <- mamikos_final |> 
-  cbind(mlrd$fitted.values) |> 
-  cbind(mlrd$residuals) |>
-  cbind(mlrd$model$price_monthly) |>
-  rename(`residuals` = `mlrd.residuals`, `fitted values` = `mlrd.fitted.values`, `actual values` = `mlrd.model.price_monthly`)
 
-jakarta_mlr <-  jakarta_sf |>
+mamikos_mlr <- readRDS("gwr/data/mamikos_final.rds") |> 
+  mutate(`fitted values` = mlrd$fitted.values, 
+         `residuals` = mlrd$residuals,
+         `actual values` = mlrd$model$price_monthly)
+
+jakarta_mlr <-  readRDS("gwr/data/jakarta_sf.rds") |>
   st_join(mamikos_mlr) |> 
   group_by(geometry, NAMOBJ) |> 
   summarise(across(where(is.numeric), ~mean(.x, na.rm = TRUE)),
@@ -17,9 +16,24 @@ jakarta_mlr <-  jakarta_sf |>
 
 mamikos_palette <- colorRampPalette(c("#f95516", "#dbdbdb", "#2caa4a"))(100)
 
+# Rename the coefficients for the GWR model
+coef_choices <- c("gender", "size", "building_year", "prox_airport", 
+                  "prox_gereja", "prox_kantorpos", "prox_kesehatan", 
+                  "prox_masjid", "prox_stasiunka", "prox_vihara", 
+                  "pendidikan_within_med", "pura_within_med")
+
+english_translations <- c("Gender", "Size", "Year of Construction", 
+                          "Proximity to Airport", "Proximity to Church", 
+                          "Proximity to Post Office", "Proximity to Health Facilities",
+                          "Proximity to Mosque", "Proximity to Railway Station", 
+                          "Proximity to Vihara", "Education Facilities Count within Range", 
+                          "Pura Count within Range")
+
+names(coef_choices) <- english_translations
+
 # Server logic for GWR
 output$GWRPlot <- renderTmap({
-  plotted_coefficient <- input$gwr_coef
+  plotted_coefficient <- coef_choices[input$gwr_coef]
   
   bw <- input$bw
   bwc <- input$bwc
@@ -30,17 +44,15 @@ output$GWRPlot <- renderTmap({
   fname <- paste0("gwr/data/jakarta_gwr/", bw, "_", bwc, "_", dist, "_", kernel, ".rds")
   jakarta_gwr <- readRDS(fname)
   
-  # Use the reverse palette for the standard error
-  paletteToUse <- if(plotted_coefficient == "size_SE") rev(mamikos_palette) else mamikos_palette
-  
   tmap_mode("view")
+  
   map <- tm_shape(jakarta_gwr) +
-    tm_fill(col=input$gwr_coef,
+    tm_fill(col=plotted_coefficient,
             style="quantile",
-            palette=paletteToUse,
+            palette=mamikos_palette,
             title=input$gwr_coef,
             midpoint = 0,
-            popup.vars=c('size'='size')) +
+            popup.vars=c(plotted_coefficient)) +
     tm_borders() +
     tm_view(set.zoom.limits = c(11,14))  # Set zoom limits
   map
@@ -48,19 +60,29 @@ output$GWRPlot <- renderTmap({
 
 output$MLRDPlot <- renderTmap({
   
-  plotted_coefficient <- input$mlr_coef
-  # Use the reverse palette for the standard error
-  paletteToUse <- if(plotted_coefficient == "size_SE") rev(mamikos_palette) else mamikos_palette
+  plotted_coefficient <- input$mlr_coefs
   
   tmap_mode("view")
   map <- tm_shape(jakarta_mlr) +
     tm_fill(col=input$mlr_coef,
             style="quantile",
-            palette=paletteToUse,
+            palette=mamikos_palette,
             title=input$mlr_coef,
             midpoint = 0,
-            popup.vars=c('size'='size')) +
+            popup.vars=c(plotted_coefficient)) +
     tm_borders() +
     tm_view(set.zoom.limits = c(11,14))  # Set zoom limits
   map
+})
+
+output$MLRDCoef <- renderDataTable({
+  datatable(mlrd$coefficients |> as.data.frame(), 
+            colnames = c("Variable", "Coefficient"),
+            rownames = c("Intercept", english_translations),
+            options = list(
+              searching = FALSE,
+              paging = FALSE,
+              ordering = FALSE,
+              info = FALSE
+            ))
 })
