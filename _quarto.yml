@@ -9,6 +9,9 @@ website:
         href: "Deliverables/Proposal.html"
       - text: "Project Poster"
         href: "Deliverables/Poster.html"
+      - text: "User Guide"
+        href: "Deliverables/User_Guide.html"
+        
     right:
       - icon: github
         href: https://github.com/yozafard/IS415-G14

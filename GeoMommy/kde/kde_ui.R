@@ -41,7 +41,10 @@ kde_ui <- fluidPage(
                                          "Disc" = "disc"))
                ),
                mainPanel(
-                 shinycssloaders::withSpinner(plotOutput("kdePlot"), type = 8, color = "#2caa4a")
+                 shinycssloaders::withSpinner(plotOutput("kdePlot"), type = 8, color = "#2caa4a"),
+                 helpText("
+                          This KDE Plot Shows the density of rental units in Jakarta. However, instead of only showcasing which area has a dense amount of rental units, we introduce monthly rent price as a weight in the calculation, meaning that our KDE plot puts more emphasis on rental units with higher monthly price.
+                         ")
                )
              )
     ),
@@ -70,8 +73,6 @@ kde_ui <- fluidPage(
                           In our app, we deem those above 0.7 to be highly correlated and thus redundant"),
                ),
                mainPanel(
-                 # Output for the Variable Distribution plot
-                 # Define plotOutput or other output here
                  shinycssloaders::withSpinner(plotOutput("corrPlot"), type = 8, color = "#2caa4a")
                  
                )
@@ -82,12 +83,11 @@ kde_ui <- fluidPage(
              sidebarLayout(
                sidebarPanel(
                  helpText("
-                         This is the Data Table
+                         Welcome! This is the Data Table, where you can see our dataset.
                          ")
                ),
                mainPanel(
-                 # Output for the Variable Distribution plot
-                 # Define plotOutput or other output here
+
                  shinycssloaders::withSpinner(DT::dataTableOutput("dataTable"), type = 8, color = "#2caa4a")
                  
                )

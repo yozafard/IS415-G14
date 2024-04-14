@@ -69,7 +69,7 @@ output$varDistPlot <- renderPlot({
 
 output$corrPlot <- renderPlot({
   df <- st_drop_geometry(sf)
-  corrplot(cor(df |> dplyr::select(-c("x_id", "price_monthly"))),
+  corrplot(cor(df |> dplyr::select(-c("price_monthly", "log_price"))),
            diag = FALSE, 
            order = "AOE",
            tl.pos = "td",

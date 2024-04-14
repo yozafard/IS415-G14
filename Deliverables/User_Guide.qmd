@@ -1,0 +1,62 @@
+---
+title: "User Guide"
+format: 
+  html:
+    code-fold: true
+    code-summary: "Show code"
+    toc-depth: 3
+author: "Alexander Vincent Lewi, Emily Aurelia, Yozafard Harold Siauheming"
+date: "12 April 2024"
+execute: 
+  message: false
+  warning: false
+  freeze: true
+---
+
+Welcome to the user guide! Here, we will be showing you how to use our Shiny App
+
+# EDA
+
+The EDA is split into three different tabs here: Kernel Density Estimation, Variable Distribution, Correlation Plot, and Data Table
+
+## Kernel Density Estimation
+
+![](images/kde_screenshot.jpg)
+
+The KDE Plot here will show the distribution of rental units, with price as additional weight, meaning that rental units with higher prices will have an additional weight on the plot.
+
+You can choose which city you want to view through this drop down button. "Select All" means you will be viewing the entire Jakarta.
+
+![](images/kde_city_button.jpg)
+This slider will be used to select the bandwidth. The default value is 0.5 kilometres.
+
+![](images/kde_bw_slider.jpg)
+
+And the last dropdown button will be used to select the kernel method
+
+![](images/kde_kernel.jpg)
+
+## Variable Distribution
+
+This tab will show the distribution of different variables in our dataset
+
+![](images/eda_var_dist.jpg)
+To change which variable you want to see, you can use the dropdown on the left
+
+![](images/var_dist_dropdown.jpg)
+
+## Correlation Plot
+
+The Correlation Plot will show which variables are highly correlated with each other.
+
+![](images/eda_corrplot.jpg)
+
+
+## Data Table
+
+In this tab, you can use the Data Table to view the entire dataset
+
+![](images/eda_dt.jpg)
+Use this dropdown to change how many rows to display in one page
+
+![](images/dt_dropdown.jpg)
